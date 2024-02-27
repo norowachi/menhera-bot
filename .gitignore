@@ -1,9 +1,13 @@
-#folders
+# folders
 node_modules
 dist
 
-#files
+# files
 *.env
 
 # test files
 *.test.*
+
+# lock files
+*-lock.json
+*.lock

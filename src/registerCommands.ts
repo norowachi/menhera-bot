@@ -1,8 +1,5 @@
-import {
-	ApplicationCommandData,
-	ApplicationCommandOptionType,
-	Client,
-} from "discord.js";
+import { ApplicationCommandData, Client } from "discord.js";
+import { ApplicationCommandOptionType } from "discord-api-types/v10";
 import readline from "node:readline";
 import { stdin as input, stdout as output } from "node:process";
 require("dotenv").config();

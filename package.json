@@ -21,7 +21,9 @@
 	},
 	"homepage": "https://github.com/Noro95/menhera-bot-public#readme",
 	"dependencies": {
+		"@types/node": "^20.11.20",
 		"canvas": "^2.8.0",
+		"discord-api-types": "^0.37.71",
 		"discord.js": "^14.8.0",
 		"dotenv": "^16.0.3",
 		"math-expression-evaluator": "^2.0.2",

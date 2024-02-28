@@ -58,8 +58,7 @@ export default class MessageEvent extends BaseEvent {
 			message.channel as TextChannel,
 			ResponseObj?.id || ""
 		);
-		console.log(OnCooldown);
-		
+
 		// if on cooldown & author is not noro or channel is not #bots, apply cooldown and ignore else run without minding the cooldown
 		if (
 			OnCooldown &&

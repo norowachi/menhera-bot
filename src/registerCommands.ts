@@ -483,6 +483,25 @@ const commands: ApplicationCommandData[] = [
 		description: "list and edit custom responses",
 		defaultMemberPermissions: ["ManageGuild"],
 	},
+	{
+		name: "birthday",
+		description: "Set your birthday to congratulations and a cake role on it!",
+		options: [
+			{
+				name: "set",
+				description: "set your bday's date",
+				type: ApplicationCommandOptionType.Subcommand,
+				options: [
+					{
+						name: "date",
+						description: "You Bday's Date in mm-dd format",
+						type: ApplicationCommandOptionType.String,
+						required: true,
+					},
+				],
+			},
+		],
+	},
 ];
 
 client.on("ready", async () => {

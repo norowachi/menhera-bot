@@ -1,8 +1,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-    <img src="https://cdn.discordapp.com/avatars/1130920705026949203/e15da66350213acfef1ac77532719a4b.webp" alt="Logo" width="80" height="80">
     <h3 align="center">Menhera Bot</h3>
+    <img src="https://cdn.discordapp.com/avatars/1130920705026949203/e15da66350213acfef1ac77532719a4b.webp" alt="Logo" width="80" height="80">
 </p>
 
 <!-- TABLE OF CONTENTS -->

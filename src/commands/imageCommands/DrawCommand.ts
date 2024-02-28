@@ -2,6 +2,7 @@ import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
 import { CommandInteraction } from "discord.js";
 import CreateImage from "../../utils/modules/imgModule";
+import path from "path";
 
 export default class DrawCommand extends BaseCommand {
 	constructor() {
@@ -12,9 +13,7 @@ export default class DrawCommand extends BaseCommand {
 
 		const file = new CreateImage()
 			.setText(text, 170, 22)
-			.setImage(
-				"https://cdn.discordapp.com/attachments/851738867933773864/940177829784612914/draw.png"
-			)
+			.setImage(path.join(process.cwd(), "images/draw.png"))
 			.setX(55)
 			.setY(40)
 			.setRect("#FFF", 10, 25, 180, 290);

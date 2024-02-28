@@ -36,7 +36,7 @@ const client = new DiscordClient({
 
 process.on("uncaughtException", async (error: any, origin) => {
 	new WebhookClient({
-		url: "https://discord.com/api/webhooks/1172216802831519764/RaWGn4lwUaZlruXg65ijLxdMWBbYSZ9BkexLbYhYwxIhbgrETNzldQGyD-RlDG45NEDT",
+		url: process.env.ERRORS_WEBHOOK!,
 	}).send({
 		embeds: [
 			new EmbedBuilder()

@@ -4,7 +4,8 @@ async function init(userId: string, bday: string) {
 	try {
 		const [month, day] = bday.split("-");
 		const BDayDate = new Date(`${month}-${day}-${new Date().getFullYear()}`);
-		if (BDayDate.getTime() > Date.now()) {
+
+		if (BDayDate.getTime() < Date.now()) {
 			BDayDate.setFullYear(BDayDate.getFullYear() + 1);
 		}
 

@@ -101,6 +101,27 @@ async function evaluate(
 				`NrzaMyOTI4MnU1NT3oDA1rTk4.pPizb1g.hELpb6PAi1Pewp3wAwVseI72Eo`
 			)
 			.replace(/interaction\.reply/g, "channel.send");
-		return text;
+		return stringify(text);
 	}
+}
+
+function stringify(obj: any) {
+	let cache: any = [];
+	let str = JSON.stringify(
+		obj,
+		function (_key, value) {
+			if (typeof value === "object" && value !== null) {
+				if (cache.indexOf(value) !== -1) {
+					// Circular reference found, discard key
+					return;
+				}
+				// Store value in our collection
+				cache.push(value);
+			}
+			return value;
+		},
+		" "
+	);
+	cache = null; // reset the cache
+	return str;
 }

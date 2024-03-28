@@ -1,6 +1,6 @@
 import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
-import { CommandInteraction, GuildMember, EmbedBuilder } from "discord.js";
+import { CommandInteraction, GuildMember, MessageEmbed } from "discord.js";
 
 export default class KickCommand extends BaseCommand {
 	constructor() {
@@ -8,46 +8,52 @@ export default class KickCommand extends BaseCommand {
 	}
 	async run(client: DiscordClient, interaction: CommandInteraction) {
 		const member = interaction.options.getMember("user") as GuildMember;
-		const reason =
-			(interaction.options.get("reason", false)?.value as string) ||
-			"No Reason Provided";
+		const reason = interaction.options.getString("reason") || "No Reason Provided";
+
 		if (!member.kickable) {
-			const embed = new EmbedBuilder()
-				.setDescription("❌ Can't kick this user")
-				.setColor("Red");
 			await interaction.followUp({
-				embeds: [embed],
+				embeds: [
+					new MessageEmbed()
+						.setDescription("❌ Can't kick this user")
+						.setColor("RED"),
+				],
 			});
 			return;
 		}
-		const memberEmbed = new EmbedBuilder()
-			.setColor("Red")
+
+		const memberEmbed = new MessageEmbed()
+			.setColor("RED")
 			.setDescription("You have been kicked from Menhera Discord Server")
-			.addFields([{ name: "Reason", value: reason }]);
-		member.send({ embeds: [memberEmbed] }).catch((err) => {
+			.addField("Reason", reason);
+
+		member.send({ embeds: [memberEmbed] }).catch(() => {
 			interaction.followUp({ content: "Cannot send messages to this user" });
 		});
-		const channelEmbed = new EmbedBuilder()
-			.setColor("Green")
+
+		const channelEmbed = new MessageEmbed()
+			.setColor("GREEN")
 			.setDescription(`✅ **${member.user.tag} kicked**`);
+
 		await interaction.followUp({ embeds: [channelEmbed] });
-		const logEmbed = new EmbedBuilder()
+
+		const logEmbed = new MessageEmbed()
 			.setAuthor({
 				name: `Moderation | Kick | ${member.user.tag}`,
 				iconURL: member.user.displayAvatarURL(),
 			})
 			.addFields([
-				{ name: "User", value: `<@${member.user.id}>`, inline: true },
+				{ name: "User", value: member.toString(), inline: true },
 				{
 					name: "Moderator",
-					value: `<@${interaction.member?.user.id}>`,
+					value: interaction.member?.toString() || "Unknown",
 					inline: true,
 				},
 				{ name: "Reason", value: reason, inline: true },
 			])
-			.setFooter({ text: member.user.id })
+			.setFooter(member.id)
 			.setTimestamp()
 			.setColor("#7289da");
+
 		await client.logChannel.send({ embeds: [logEmbed] });
 		await member.kick(reason);
 	}

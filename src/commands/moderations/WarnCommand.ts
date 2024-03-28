@@ -7,29 +7,31 @@ export default class WarnCommand extends BaseCommand {
 	constructor() {
 		super("warn", "moderation");
 	}
+
 	async run(client: DiscordClient, interaction: CommandInteraction) {
-		const member = interaction.options.data[0].member as GuildMember;
-		const reason = interaction.options.data[1].value as string;
+		const options = interaction.options.data;
+		const member = options[0].member as GuildMember;
+		const reason = options[1].value as string;
+
 		if (reason.length > 500) {
 			const embed = new EmbedBuilder()
 				.setDescription("❌ Warning reason should not be more than 500 letters")
-				.setColor("Red");
+				.setColor("RED");
 			await interaction.followUp({ embeds: [embed] });
 			return;
 		}
-		const MemberEmbed = new EmbedBuilder()
+
+		const memberEmbed = new EmbedBuilder()
 			.setAuthor({ name: member.user.tag, iconURL: member.user.displayAvatarURL() })
 			.setDescription("You have been warned on Menhera Chan Discord Server")
 			.setColor(member.displayHexColor)
 			.addFields([{ name: "Reason", value: reason }]);
-		member.send({ embeds: [MemberEmbed] }).catch((err) => {
-			console.log(err);
-		});
+		await member.send({ embeds: [memberEmbed] }).catch(console.error);
 
-		const ChannelEmbed = new EmbedBuilder()
+		const channelEmbed = new EmbedBuilder()
 			.setDescription(`✅ **${member.user.tag} warned**`)
-			.setColor("Green");
-		await interaction.followUp({ embeds: [ChannelEmbed] });
+			.setColor("GREEN");
+		await interaction.followUp({ embeds: [channelEmbed] });
 
 		const logEmbed = new EmbedBuilder()
 			.setAuthor({
@@ -45,10 +47,11 @@ export default class WarnCommand extends BaseCommand {
 				},
 				{ name: "Reason", value: reason, inline: true },
 			])
-			.setFooter({text: member.user.id})
+			.setFooter({ text: member.user.id })
 			.setTimestamp()
-			.setColor("#7289da");
+			.setColor("#7289DA");
 		await client.logChannel.send({ embeds: [logEmbed] });
+
 		await addWarning({
 			userId: member.user.id,
 			warning: reason,

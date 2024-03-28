@@ -11,27 +11,33 @@ export default class DelWarnCommand extends BaseCommand {
 
 	async run(client: DiscordClient, interaction: CommandInteraction) {
 		const id = interaction.options.get("id", true).value as string;
+
 		if (!Types.ObjectId.isValid(id)) {
 			const embed = new EmbedBuilder()
-				.setColor("Red")
-				.setDescription("❌ Provided ID is wrong");
+				.setColor("RED")
+				.setDescription("❌ Provided ID is incorrect");
 			await interaction.followUp({ embeds: [embed] });
 			return;
 		}
+
 		const mongooseID = new Types.ObjectId(id);
 		const warning = await deleteWarning(mongooseID);
+
 		if (!warning) {
 			const embed = new EmbedBuilder()
-				.setColor("Red")
-				.setDescription("❗ Warning Id cannot be found");
+				.setColor("RED")
+				.setDescription("❗ Warning ID cannot be found");
 			await interaction.followUp({ embeds: [embed] });
 			return;
 		}
+
 		const user = await client.users.fetch(warning.userId as Snowflake);
+
 		const channelEmbed = new EmbedBuilder()
-			.setColor("Green")
+			.setColor("GREEN")
 			.setDescription(`✅ Deleted warning \`${id}\` for ${user.tag}`);
 		await interaction.followUp({ embeds: [channelEmbed] });
+
 		const logEmbed = new EmbedBuilder()
 			.setAuthor({
 				name: `Moderation | Deleted Warn | ${user.tag}`,

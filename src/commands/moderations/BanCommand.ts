@@ -1,6 +1,6 @@
 import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
-import { CommandInteraction, GuildMember, EmbedBuilder } from "discord.js";
+import { CommandInteraction, User, MessageEmbed } from "discord.js";
 
 export default class BanCommand extends BaseCommand {
 	constructor() {
@@ -9,59 +9,53 @@ export default class BanCommand extends BaseCommand {
 
 	async run(client: DiscordClient, interaction: CommandInteraction) {
 		const user = interaction.options.getUser("user", true);
-		const reason =
-			(interaction.options.get("reason", false)?.value as string) ||
-			"No Reason Provided";
-		if (!interaction.guild?.members.cache.get(user.id)?.bannable) {
-			const embed = new EmbedBuilder()
-				.setDescription("❌ Can't ban this user")
-				.setColor("Red");
+		const reason = interaction.options.getString("reason") || "No Reason Provided";
+
+		const member = interaction.guild?.members.cache.get(user.id);
+		if (!member?.bannable) {
 			await interaction.followUp({
-				embeds: [embed],
+				embeds: [
+					new MessageEmbed()
+						.setDescription("❌ Can't ban this user")
+						.setColor("RED"),
+				],
 			});
 			return;
 		}
-		const MemberEmbed = new EmbedBuilder()
-			.setAuthor({
-				name: user.tag,
-				iconURL: user.displayAvatarURL(),
-			})
+
+		const memberEmbed = new MessageEmbed()
+			.setAuthor(user.tag, user.displayAvatarURL())
 			.setDescription("You have been Banned from Menhera Chan Discord Server")
-			.addFields([{ name: "Reason", value: reason }])
-			.setColor("Red");
-		user
-			.send({
-				embeds: [MemberEmbed],
-			})
-			.catch((err) => {
-				interaction.followUp({
-					content: "Cannot send messages to this user",
-				});
-			});
+			.addField("Reason", reason)
+			.setColor("RED");
 
-		const ChannelEmbed = new EmbedBuilder()
+		user.send({ embeds: [memberEmbed] }).catch(() => {
+			interaction.followUp({ content: "Cannot send messages to this user" });
+		});
+
+		const channelEmbed = new MessageEmbed()
 			.setDescription(`✅ **${user.tag} has been Banned**`)
-			.setColor("Green");
-		await interaction.followUp({ embeds: [ChannelEmbed] });
+			.setColor("GREEN");
 
-		const logEmbed = new EmbedBuilder()
-			.setAuthor({
-				name: `Moderation | Ban | ${user.tag}`,
-				iconURL: user.displayAvatarURL(),
-			})
+		await interaction.followUp({ embeds: [channelEmbed] });
+
+		const logEmbed = new MessageEmbed()
+			.setAuthor(`Moderation | Ban | ${user.tag}`, user.displayAvatarURL())
 			.addFields([
-				{ name: "User", value: `<@${user.id}>`, inline: true },
+				{ name: "User", value: member.toString(), inline: true },
 				{
 					name: "Moderator",
-					value: `<@${interaction.member?.user.id}>`,
+					value: interaction.member?.toString() || "Unknown",
 					inline: true,
 				},
 				{ name: "Reason", value: reason, inline: true },
 			])
-			.setFooter({ text: user.id })
+			.setFooter(user.id)
 			.setTimestamp()
 			.setColor("#7289da");
+
 		await client.logChannel.send({ embeds: [logEmbed] });
+
 		await interaction.guild?.bans.create(user.id, { reason: reason });
 	}
 }

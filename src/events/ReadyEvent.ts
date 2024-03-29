@@ -15,21 +15,16 @@ export default class ReadyEvent extends BaseEvent {
 	async run(client: DiscordClient) {
 		console.log(`${client.user?.tag} has logged in.`);
 		const channel = (await client.channels.fetch(
-			"1055223508298379304"
+			"881546015705026610" //mod-logs
 		)) as TextChannel;
 		client.logChannel = channel;
-
-		const role = client.guilds.cache
-			.get("878173412529414174")!
-			.roles.cache.get("879764468907794533");
-		client.muteRole = role!;
 
 		client.guildXP.channel = [
 			"881292562332258394", //spam
 			"894044004927283261", //mudae
 			"880777835323744296", //bot-channel
 		];
-		client.guildXP.logChannel = "880776818527981598";
+		client.guildXP.logChannel = "880776818527981598"; //general
 		setInterval(() => {
 			Promise.all([
 				// weekly lb reset and announcement

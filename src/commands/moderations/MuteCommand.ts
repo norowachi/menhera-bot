@@ -2,7 +2,6 @@ import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
 import { CommandInteraction, GuildMember, EmbedBuilder } from "discord.js";
 import ms from "ms";
-import { addModeration } from "../../database/functions/moderationFunction";
 
 export default class MuteCommand extends BaseCommand {
 	constructor() {
@@ -10,6 +9,7 @@ export default class MuteCommand extends BaseCommand {
 	}
 	async run(client: DiscordClient, interaction: CommandInteraction) {
 		const member = interaction.options.data[0].member as GuildMember;
+
 		const time = ms(interaction.options.data[1].value as string);
 		const reason = interaction.options.data[2]
 			? (interaction.options.data[2].value as string)
@@ -17,15 +17,6 @@ export default class MuteCommand extends BaseCommand {
 		if (!time) {
 			const embed = new EmbedBuilder()
 				.setDescription("❌ Provide correct time for the mute")
-				.setColor("Red");
-			await interaction.followUp({ embeds: [embed] });
-			return;
-		}
-		if (!client.muteRole.editable) {
-			const embed = new EmbedBuilder()
-				.setDescription(
-					"❌ I can't assign the mute role. Make sure I have higher position then the role"
-				)
 				.setColor("Red");
 			await interaction.followUp({ embeds: [embed] });
 			return;
@@ -39,7 +30,7 @@ export default class MuteCommand extends BaseCommand {
 		}
 		await member.timeout(time, reason);
 		const memberEmbed = new EmbedBuilder()
-			.setColor("Red")
+			.setColor("Green")
 			.setDescription("You have been muted on Menhera Chan Discord Server")
 			.addFields([
 				{
@@ -86,39 +77,5 @@ export default class MuteCommand extends BaseCommand {
 			.setTimestamp()
 			.setColor("#7289da");
 		await client.logChannel.send({ embeds: [logEmbed] });
-
-		const timeout = setTimeout(async () => {
-			const logEmbed = new EmbedBuilder()
-				.setAuthor({
-					name: `Moderation | Unmute | ${member.user.tag}`,
-					url: member.user.displayAvatarURL(),
-				})
-				.addFields([
-					{
-						name: "User",
-						value: `<@${member.user.id}>`,
-						inline: true,
-					},
-					{
-						name: "Moderator",
-						value: `Auto (discord)`,
-						inline: true,
-					},
-					{ name: "Mute Reason", value: reason, inline: true },
-				])
-				.setFooter({ text: member.user.id })
-				.setTimestamp()
-				.setColor("#7289da");
-			await client.logChannel.send({ embeds: [logEmbed] });
-		}, time);
-
-		const muteId = await addModeration({
-			userId: member.id,
-			userTag: member.user.tag,
-			moderationType: "mute",
-			moderationTime: time,
-		});
-
-		client.mutes.set(member.id, { timeout: timeout, id: muteId });
 	}
 }

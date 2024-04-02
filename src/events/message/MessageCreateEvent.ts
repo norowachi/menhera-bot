@@ -43,56 +43,6 @@ export default class MessageEvent extends BaseEvent {
 		if (!message.guild) return;
 		await expSystem(client, message);
 
-		if (message.content.toLowerCase().includes("clown"))
-			message.react("<a:MenheraClown:1224465512449446060>");
-		if (
-			/noro|void|<@534783899331461123>/gi.test(message.content.toLowerCase())
-		) {
-			message.react("<:MiniheraLookUpScared:1113640527229882388> ");
-			message.reply("Daddy!");
-		}
-		const rng =
-			Math.floor(Math.random() * 10) > 5 ? Math.floor(Math.random() * 13) : 0;
-		if (rng != 0) {
-			switch (rng.toString()) {
-				case "1":
-					message.react("<:MenheraNya1:998751931927371848>");
-					break;
-				case "2":
-					message.react("<:MenheraHeh:1033111572253524060>");
-					break;
-				case "3":
-					message.react("<a:MenheraAlone:1111556519243300934>");
-					break;
-				case "4":
-					message
-						.react("<a:MenheraCheers1:998735903856001095>")
-						.then(() => message.react("<a:MenheraCheers2:998735901997928538>"));
-					break;
-				case "5":
-					message.react("<:MenheraCopium:1041066773358858250>");
-					break;
-				case "6":
-					message.react("<:MenheraPog:1033111580931526656>");
-					break;
-				case "7":
-					message.react("<:MenheraSexy:1004213130018177034>");
-					break;
-				case "8":
-					message.react("<:MenheraDeranged:998735844468863036>");
-					break;
-				case "9":
-					message.react("<:MenheraRaisedEyebrow:998751975246143579>");
-					break;
-				case "10":
-					message.react("<:MenheraInspect:998772180567466085>");
-					break;
-				default:
-					message.react("<:MenheraBlush5:998700653704654910>");
-					break;
-			}
-		}
-
 		// checking if the message contains a command
 		if (await getCommand(client, message)) return;
 

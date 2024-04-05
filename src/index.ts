@@ -11,26 +11,20 @@ require("dotenv").config();
 
 const client = new DiscordClient({
 	intents: [
-		GatewayIntentBits.AutoModerationConfiguration,
-		GatewayIntentBits.AutoModerationExecution,
-		GatewayIntentBits.DirectMessageReactions,
-		GatewayIntentBits.DirectMessageTyping,
-		GatewayIntentBits.DirectMessages,
-		GatewayIntentBits.GuildEmojisAndStickers,
-		GatewayIntentBits.GuildIntegrations,
-		GatewayIntentBits.GuildInvites,
-		GatewayIntentBits.GuildMembers,
-		GatewayIntentBits.GuildMessageReactions,
-		GatewayIntentBits.GuildMessageTyping,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.GuildModeration,
-		GatewayIntentBits.GuildScheduledEvents,
-		GatewayIntentBits.GuildVoiceStates,
-		GatewayIntentBits.GuildWebhooks,
+		// all guild stuff
 		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMembers,
+		// for audit log
+		GatewayIntentBits.GuildModeration,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.GuildMessageReactions,
+		// DMs and DM reactions
+		GatewayIntentBits.DirectMessages,
+		GatewayIntentBits.DirectMessageReactions,
+		// message content
 		GatewayIntentBits.MessageContent,
 	],
-	partials: [Partials.Message, Partials.Reaction],
+	partials: [Partials.Message, Partials.Reaction, Partials.User],
 	allowedMentions: { parse: ["roles", "users"], repliedUser: true },
 }); //.on("debug", console.log);
 

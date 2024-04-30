@@ -56,7 +56,7 @@ Menhera Bot is a private [Discord](https://discord.com) bot built for the Menher
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/Noro95/menhera-bot-public.git
+   git clone https://github.com/Noro95/menhera-bot.git
    ```
 2. Install NPM packages
    ```sh

@@ -63,11 +63,23 @@ Menhera Bot is a private [Discord](https://discord.com) bot built for the Menher
    npm install
    ```
 3. Enter your credentials in `.env` according to `.env-example`
-4. Run the bot
+
+### Starting The Bot
+1. Install [Git](https://git-scm.com/downloads) and configure it to be able to use bash scripts and commands (OPTIONAL)
+2. Register the commands
+   - if you have git
+     ```sh
+     npm run register
+     ```
+   - else just run the file
+     ```sh
+     tsc && node dist/registerCommands.js
+     ```
+3. Now you can run the bot
    ```sh
    npm start
    ```
-
+* if you have any issues do not hesitate to contact us or create an issue in this repo, but do note that this is not intended for public use and could have many hardcoded stuff
 <!-- CONTRIBUTING -->
 
 ## Contributing

@@ -6,7 +6,7 @@ stty -echo
 # Check if ts-node command exists
 if command -v ts-node &> /dev/null; then
     # ts-node exists
-   # ts-node src/register.ts
+    ts-node src/registerCommands.ts
 tsc
 else
     # ts-node does not exist
@@ -14,7 +14,7 @@ else
     # Check if tsc and node commands exist
     if command -v tsc &> /dev/null && command -v node &> /dev/null; then
         # tsc and node commands exist
-        tsc src/register.ts && node dist/register.js
+        tsc src/registerCommands.ts && node dist/registerCommands.js
     else
         echo "Error: ts-node, or tsc and node commands are not installed."
     fi

@@ -136,40 +136,39 @@ async function LevelUpRole(user: GuildMember, newLevel: number) {
 		"1147525186929831957", //7th role
 		"1147525494129037333", //8th role
 	];
-	// const removeAll = () =>
-	// 	user.roles.remove(roles.filter((r) => r !== roles[4]));
+	const rolesTill = (n: number) => roles.slice(0, n);
 
 	if (newLevel >= 100) {
 		if (user.roles.cache.has(roles[7])) return;
-		return await user.roles.add(roles[7]);
+		return await user.roles.add(rolesTill(7));
 	}
 	if (newLevel >= 85) {
 		if (user.roles.cache.has(roles[6])) return;
-		return await user.roles.add(roles[6]);
+		return await user.roles.add(rolesTill(6));
 	}
 	if (newLevel >= 70) {
 		if (user.roles.cache.has(roles[5])) return;
-		return await user.roles.add(roles[5]);
+		return await user.roles.add(rolesTill(5));
 	}
 	if (newLevel >= 50) {
 		if (user.roles.cache.has(roles[4])) return;
-		return await user.roles.add(roles[4]);
+		return await user.roles.add(rolesTill(4));
 	}
 	if (newLevel >= 25) {
 		if (user.roles.cache.has(roles[3])) return;
-		return await user.roles.add(roles[3]);
+		return await user.roles.add(rolesTill(3));
 	}
 	if (newLevel >= 15) {
 		if (user.roles.cache.has(roles[2])) return;
-		return await user.roles.add(roles[2]);
+		return await user.roles.add(rolesTill(2));
 	}
 	if (newLevel >= 10) {
 		if (user.roles.cache.has(roles[1])) return;
-		return await user.roles.add(roles[1]);
+		return await user.roles.add(rolesTill(1));
 	}
 	if (newLevel >= 5) {
 		if (user.roles.cache.has(roles[0])) return;
-		return await user.roles.add(roles[0]);
+		return await user.roles.add(rolesTill(0));
 	}
 	return;
 }

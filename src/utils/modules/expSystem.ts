@@ -136,7 +136,7 @@ async function LevelUpRole(user: GuildMember, newLevel: number) {
 		"1147525186929831957", //7th role
 		"1147525494129037333", //8th role
 	];
-	const rolesTill = (n: number) => roles.slice(0, n);
+	const rolesTill = (n: number) => roles.slice(0, n + 1);
 
 	if (newLevel >= 100) {
 		if (user.roles.cache.has(roles[7])) return;

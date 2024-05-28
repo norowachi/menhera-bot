@@ -17,14 +17,14 @@ export default class UnbanCommand extends BaseCommand {
 			const embed = new EmbedBuilder()
 				.setColor("Red")
 				.setDescription(`❗ This is user is not banned`);
-			await interaction.followUp({ embeds: [embed] });
+			await interaction.reply({ embeds: [embed] });
 			return;
 		}
 		await interaction.guild!.bans.remove(bannedId, reason);
 		const channelEmbed = new EmbedBuilder()
 			.setColor("Green")
 			.setDescription(`✅ **${bannedUser.user.tag} Unbanned**`);
-		await interaction.followUp({ embeds: [channelEmbed] });
+		await interaction.reply({ embeds: [channelEmbed] });
 		const logEmbed = new EmbedBuilder()
 			.setAuthor({
 				name: `Moderation | Unban | ${bannedUser.user.tag}`,

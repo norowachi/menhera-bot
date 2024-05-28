@@ -14,11 +14,14 @@ export default class WarnCommand extends BaseCommand {
 			const embed = new EmbedBuilder()
 				.setDescription("❌ Warning reason should not be more than 500 letters")
 				.setColor("Red");
-			await interaction.followUp({ embeds: [embed] });
+			await interaction.reply({ embeds: [embed] });
 			return;
 		}
 		const MemberEmbed = new EmbedBuilder()
-			.setAuthor({ name: member.user.tag, iconURL: member.user.displayAvatarURL() })
+			.setAuthor({
+				name: member.user.tag,
+				iconURL: member.user.displayAvatarURL(),
+			})
 			.setDescription("You have been warned on Menhera Chan Discord Server")
 			.setColor(member.displayHexColor)
 			.addFields([{ name: "Reason", value: reason }]);
@@ -29,7 +32,7 @@ export default class WarnCommand extends BaseCommand {
 		const ChannelEmbed = new EmbedBuilder()
 			.setDescription(`✅ **${member.user.tag} warned**`)
 			.setColor("Green");
-		await interaction.followUp({ embeds: [ChannelEmbed] });
+		await interaction.reply({ embeds: [ChannelEmbed] });
 
 		const logEmbed = new EmbedBuilder()
 			.setAuthor({
@@ -45,7 +48,7 @@ export default class WarnCommand extends BaseCommand {
 				},
 				{ name: "Reason", value: reason, inline: true },
 			])
-			.setFooter({text: member.user.id})
+			.setFooter({ text: member.user.id })
 			.setTimestamp()
 			.setColor("#7289da");
 		await client.logChannel.send({ embeds: [logEmbed] });

@@ -9,6 +9,8 @@ export default class DrawCommand extends BaseCommand {
 		super("draw", "images");
 	}
 	async run(client: DiscordClient, interaction: CommandInteraction) {
+		await interaction.deferReply();
+
 		const text = interaction.options.get("text", true).value as string;
 
 		const file = new CreateImage()

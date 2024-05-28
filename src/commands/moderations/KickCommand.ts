@@ -15,7 +15,7 @@ export default class KickCommand extends BaseCommand {
 			const embed = new EmbedBuilder()
 				.setDescription("❌ Can't kick this user")
 				.setColor("Red");
-			await interaction.followUp({
+			await interaction.reply({
 				embeds: [embed],
 			});
 			return;
@@ -25,12 +25,12 @@ export default class KickCommand extends BaseCommand {
 			.setDescription("You have been kicked from Menhera Discord Server")
 			.addFields([{ name: "Reason", value: reason }]);
 		member.send({ embeds: [memberEmbed] }).catch((err) => {
-			interaction.followUp({ content: "Cannot send messages to this user" });
+			interaction.reply({ content: "Cannot send messages to this user" });
 		});
 		const channelEmbed = new EmbedBuilder()
 			.setColor("Green")
 			.setDescription(`✅ **${member.user.tag} kicked**`);
-		await interaction.followUp({ embeds: [channelEmbed] });
+		await interaction.reply({ embeds: [channelEmbed] });
 		const logEmbed = new EmbedBuilder()
 			.setAuthor({
 				name: `Moderation | Kick | ${member.user.tag}`,

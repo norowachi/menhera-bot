@@ -221,7 +221,7 @@ async function List(
 			};
 		})
 	);
-	data.editReply({
+	data.reply({
 		content:
 			"In `EditModal` put **<new line>---<new line>** between every different message",
 		embeds: [

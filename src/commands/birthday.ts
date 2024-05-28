@@ -26,7 +26,7 @@ async function setBdayCmd(interaction: CommandInteraction) {
 	const bdayDate = interaction.options.get("date", true).value as string;
 
 	if (!/\d{1,2}-\d{1,2}/.test(bdayDate)) {
-		interaction.followUp({
+		interaction.reply({
 			content:
 				"Please enter a correct date in the mm-dd-yyyy format.\nexample: 1-2-2003 or 01-02-2003",
 		});
@@ -36,13 +36,13 @@ async function setBdayCmd(interaction: CommandInteraction) {
 	const [month, day] = bdayDate.split("-").map((s) => parseInt(s));
 
 	if (month > 12) {
-		interaction.followUp({
+		interaction.reply({
 			content: "Are you on Mars? Cuz iirc Earth only has 12 months",
 		});
 		return;
 	}
 	if (day > 31) {
-		interaction.followUp({
+		interaction.reply({
 			content: `Really? And which month has ${day} days then?`,
 		});
 		return;
@@ -51,7 +51,7 @@ async function setBdayCmd(interaction: CommandInteraction) {
 	// save to db
 	const resp = await setBday(interaction.user.id, bdayDate);
 
-	return interaction.followUp({
+	return interaction.reply({
 		content: resp
 			? "Bday saved successfully"
 			: "Either you tried setting *another* bday or **There was an Error!**",

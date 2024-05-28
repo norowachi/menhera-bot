@@ -136,7 +136,6 @@ export async function SendStarMessage(
 	minStars: number
 ) {
 	if (!starMsg) {
-		const TooLargeAttachments: string[] = [];
 		const attachments: string[] = [];
 		if (message.attachments.size >= 1) {
 			for (let i = 0; i <= message.attachments.size - 1; i++) {

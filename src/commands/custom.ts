@@ -36,7 +36,7 @@ async function Add(client: DiscordClient, data: CommandInteraction) {
 	const message =
 		(data.options.get("message", false)?.value as string) || undefined;
 	if (!reaction && !message) {
-		data.followUp({
+		data.reply({
 			content: "You have to include either `reaction` or `message`",
 		});
 		return;
@@ -54,7 +54,7 @@ async function Add(client: DiscordClient, data: CommandInteraction) {
 			).size > 0
 		)
 	) {
-		data.followUp({
+		data.reply({
 			content: `**reaction** is not an emoji that I have access to`,
 		});
 		return;
@@ -69,7 +69,7 @@ async function Add(client: DiscordClient, data: CommandInteraction) {
 			createdBy: data.user.id,
 		})
 	) {
-		data.followUp({
+		data.reply({
 			embeds: [
 				new EmbedBuilder().setDescription(
 					`**Id:** ${id}\n**Keyword:** ${keyword}\n${
@@ -81,7 +81,7 @@ async function Add(client: DiscordClient, data: CommandInteraction) {
 			],
 		});
 	} else {
-		data.followUp({
+		data.reply({
 			content: `There was an error please try again later, if this had happened more than once contact a developer...`,
 		});
 	}
@@ -91,11 +91,11 @@ async function Add(client: DiscordClient, data: CommandInteraction) {
 async function Remove(data: CommandInteraction) {
 	const id = data.options.get("id", true).value as string;
 	if (await removeResponse(data.guildId!, id)) {
-		data.followUp({
+		data.reply({
 			content: "Deleted response successfully",
 		});
 	} else {
-		data.followUp({
+		data.reply({
 			content:
 				"Couldn't delete the response, Check if you've typed the id correctly\nif you're sure that you're correct, then contact a developer if this had happened more than once",
 		});

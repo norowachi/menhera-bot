@@ -15,7 +15,7 @@ export default class DelWarnCommand extends BaseCommand {
 			const embed = new EmbedBuilder()
 				.setColor("Red")
 				.setDescription("❌ Provided ID is wrong");
-			await interaction.followUp({ embeds: [embed] });
+			await interaction.reply({ embeds: [embed] });
 			return;
 		}
 		const mongooseID = new Types.ObjectId(id);
@@ -24,14 +24,14 @@ export default class DelWarnCommand extends BaseCommand {
 			const embed = new EmbedBuilder()
 				.setColor("Red")
 				.setDescription("❗ Warning Id cannot be found");
-			await interaction.followUp({ embeds: [embed] });
+			await interaction.reply({ embeds: [embed] });
 			return;
 		}
 		const user = await client.users.fetch(warning.userId as Snowflake);
 		const channelEmbed = new EmbedBuilder()
 			.setColor("Green")
 			.setDescription(`✅ Deleted warning \`${id}\` for ${user.tag}`);
-		await interaction.followUp({ embeds: [channelEmbed] });
+		await interaction.reply({ embeds: [channelEmbed] });
 		const logEmbed = new EmbedBuilder()
 			.setAuthor({
 				name: `Moderation | Deleted Warn | ${user.tag}`,

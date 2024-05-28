@@ -10,6 +10,8 @@ export default class LeaderboardCommand extends BaseCommand {
 		super("leaderboard", "leveling");
 	}
 	async run(client: DiscordClient, interaction: CommandInteraction) {
+		await interaction.deferReply();
+
 		const sortedUsers = sortUserXP(await getAllUser());
 		const embeds = generateRankEmbed(
 			interaction,
@@ -17,7 +19,7 @@ export default class LeaderboardCommand extends BaseCommand {
 		);
 
 		if (embeds.length == 1) {
-			interaction.editReply({ embeds: [embeds[0]] }).catch(() => {});
+			interaction.reply({ embeds: [embeds[0]] }).catch(() => {});
 			return;
 		} else {
 			await PageButtonInteraction(embeds, interaction);

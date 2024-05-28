@@ -96,7 +96,7 @@ export default class CreateReactRole extends BaseCommand {
 			if (int.customId === `send-${date}`) {
 				if (!interaction.replied) interaction.deferReply({ ephemeral: true });
 				if (!RoleIDs || RoleIDs.length <= 0) {
-					interaction.followUp({
+					interaction.reply({
 						content: "You have to choose at least 1 self-role",
 						ephemeral: true,
 					});
@@ -113,7 +113,7 @@ export default class CreateReactRole extends BaseCommand {
 						],
 					})
 					.catch((err) =>
-						interaction.followUp({ content: `Error: ${err}`, ephemeral: true })
+						interaction.reply({ content: `Error: ${err}`, ephemeral: true })
 					);
 				await initDoc(msg.id, RoleIDs, AllowedRoles);
 				int.reply({ content: "Done", ephemeral: true });

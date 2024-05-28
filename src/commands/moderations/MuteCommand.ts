@@ -18,14 +18,14 @@ export default class MuteCommand extends BaseCommand {
 			const embed = new EmbedBuilder()
 				.setDescription("❌ Provide correct time for the mute")
 				.setColor("Red");
-			await interaction.followUp({ embeds: [embed] });
+			await interaction.reply({ embeds: [embed] });
 			return;
 		}
 		if (member.permissions.has(["ManageMessages"])) {
 			const embed = new EmbedBuilder()
 				.setDescription("❌ I don't have right to mute a member of Staff Team")
 				.setColor("Red");
-			await interaction.followUp({ embeds: [embed] });
+			await interaction.reply({ embeds: [embed] });
 			return;
 		}
 		await member.timeout(time, reason);
@@ -43,14 +43,14 @@ export default class MuteCommand extends BaseCommand {
 				{ name: "Reason", value: reason, inline: true },
 			]);
 		member.send({ embeds: [memberEmbed] }).catch((err) => {
-			interaction.followUp({
+			interaction.reply({
 				content: "Cannot send messages to this user",
 			});
 		});
 		const channelEmbed = new EmbedBuilder()
 			.setColor("Green")
 			.setDescription(`✅ **${member.user.tag} muted**`);
-		await interaction.followUp({ embeds: [channelEmbed] });
+		await interaction.reply({ embeds: [channelEmbed] });
 
 		const logEmbed = new EmbedBuilder()
 			.setAuthor({

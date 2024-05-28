@@ -76,12 +76,11 @@ export default class InteractionCreateEvent extends BaseEvent {
 		try {
 			const command = client.commands.get(interaction.commandName);
 			if (command) {
-				await interaction.deferReply({ ephemeral: false });
 				if (
 					["moderation", "leveling"].includes(command.getCategory()) &&
 					!IsMenheraServer(interaction.guildId)
 				) {
-					await interaction.followUp(
+					await interaction.reply(
 						"You cannot use that command outside menhera servers, https://discord.gg/menhera & https://discord.gg/menherachan"
 					);
 					return;

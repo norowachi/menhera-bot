@@ -58,24 +58,24 @@ async function evaluate(
 			]);
 
 		if (response.length <= 1024) {
-			(await interaction.followUp({
+			await interaction.reply({
 				embeds: [evmbed],
 				components: [XBtn],
-			})) as Message;
+			});
 		} else if (response.length <= 2048) {
-			(await interaction.followUp({
+			await interaction.reply({
 				content: "```js\n" + response + "\n```",
 				components: [XBtn],
-			})) as Message;
+			});
 		} else {
 			const output = new AttachmentBuilder(Buffer.from(response)).setName(
 				"output.txt"
 			);
 			await interaction.user!.send({ files: [output] });
-			(await interaction.followUp({
+			await interaction.reply({
 				content: "Sent Output in DM",
 				components: [XBtn],
-			})) as Message;
+			});
 		}
 	} catch (err: any) {
 		const errevmbed = new EmbedBuilder()
@@ -87,10 +87,10 @@ async function evaluate(
 				text: client!.user!.username,
 				iconURL: client!.user!.displayAvatarURL(),
 			});
-		(await interaction.followUp({
+		await interaction.reply({
 			embeds: [errevmbed],
 			components: [XBtn],
-		})) as Message;
+		});
 	}
 	function clean(text: string) {
 		text = text

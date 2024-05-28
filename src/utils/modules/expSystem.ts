@@ -28,7 +28,7 @@ export const expSystem = async (client: DiscordClient, message: Message) => {
 	const addedXp =
 		(multi.length >= 1
 			? multi.map((d) => d.xp)?.reduce((a, b) => (a || 0) + b)
-			: 0) + guildData.exp.xp;
+			: 0) + (guildData.exp.xp || 1);
 	const cooldown = guildData.exp.cooldown
 		? guildData.exp.cooldown * 1000
 		: 8 * 1000;

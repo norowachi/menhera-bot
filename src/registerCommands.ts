@@ -1,4 +1,8 @@
-import { ApplicationCommandData, Client } from "discord.js";
+import {
+	ApplicationCommandData,
+	ApplicationCommandType,
+	Client,
+} from "discord.js";
 import { ApplicationCommandOptionType } from "discord-api-types/v10";
 import readline from "node:readline";
 import { stdin as input, stdout as output } from "node:process";
@@ -502,6 +506,10 @@ const commands: ApplicationCommandData[] = [
 			},
 		],
 	},
+	{
+		name: "Report Message",
+		type: ApplicationCommandType.Message,
+	},
 ];
 
 client.on("ready", async () => {
@@ -528,23 +536,24 @@ client.on("ready", async () => {
 async function CreateOrDelete(reply: string) {
 	let val = 0;
 	if (reply.toLowerCase().startsWith("c")) {
-		commands.forEach(async (command) => {
-			try {
-				const data = await client.application!.commands.create(command);
-				console.log(
-					`✅ Created:\t${data.name}\t\t|\t${data.id}\t|\t${data.guildId}`
-				);
-			} catch (err) {
-				console.log("\x1b[31m%s\x1b[0m", `❎ Failed:\t${command.name}`);
-				console.error(err);
-			}
-			val++;
-			if (val >= commands.length) {
-				console.log("\x1b[36m%s\x1b[0m", "Completed Registering\nExiting Now");
-				process.exit(0);
-			}
-		});
 		console.log("\x1b[32m%s\x1b[0m", "Started creating...");
+		await client.application!.commands.set(commands);
+		// commands.forEach(async (command) => {
+		// 	try {
+		// 		const data = await client.application!.commands.create(command);
+		// 		console.log(
+		// 			`✅ Created:\t${data.name}\t\t|\t${data.id}\t|\t${data.guildId}`
+		// 		);
+		// 	} catch (err) {
+		// 		console.log("\x1b[31m%s\x1b[0m", `❎ Failed:\t${command.name}`);
+		// 		console.error(err);
+		// 	}
+		// 	val++;
+		// 	if (val >= commands.length) {
+		console.log("\x1b[36m%s\x1b[0m", "Completed Registering\nExiting Now");
+		process.exit(0);
+		// 	}
+		// });
 	} else if (reply.toLowerCase().startsWith("d")) {
 		const cmds = await client.application!.commands.fetch();
 		if (cmds.size < 1) {

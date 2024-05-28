@@ -16,7 +16,7 @@ export default class BanCommand extends BaseCommand {
 			const embed = new EmbedBuilder()
 				.setDescription("❌ Can't ban this user")
 				.setColor("Red");
-			await interaction.followUp({
+			await interaction.reply({
 				embeds: [embed],
 			});
 			return;
@@ -34,7 +34,7 @@ export default class BanCommand extends BaseCommand {
 				embeds: [MemberEmbed],
 			})
 			.catch((err) => {
-				interaction.followUp({
+				interaction.reply({
 					content: "Cannot send messages to this user",
 				});
 			});
@@ -42,7 +42,7 @@ export default class BanCommand extends BaseCommand {
 		const ChannelEmbed = new EmbedBuilder()
 			.setDescription(`✅ **${user.tag} has been Banned**`)
 			.setColor("Green");
-		await interaction.followUp({ embeds: [ChannelEmbed] });
+		await interaction.reply({ embeds: [ChannelEmbed] });
 
 		const logEmbed = new EmbedBuilder()
 			.setAuthor({

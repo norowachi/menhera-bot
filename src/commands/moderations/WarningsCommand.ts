@@ -15,7 +15,7 @@ export default class WarningsCommand extends BaseCommand {
 			const embed = new EmbedBuilder().setDescription(
 				"❗ There are no warnings"
 			);
-			await interaction.followUp({ embeds: [embed] });
+			await interaction.reply({ embeds: [embed] });
 			return;
 		}
 		let string = "";
@@ -30,7 +30,7 @@ export default class WarningsCommand extends BaseCommand {
 		for (const warning of warnings) {
 			if (string.length >= 1500) {
 				embed.setDescription(string);
-				await interaction.followUp({ embeds: [embed] });
+				await interaction.reply({ embeds: [embed] });
 				string = "";
 			}
 			string += `**ID: ${warning._id!} | Moderator: ${warning.moderator}**\n${
@@ -38,6 +38,6 @@ export default class WarningsCommand extends BaseCommand {
 			} - <t:${warning.date}:f>\n\n`;
 		}
 		embed.setDescription(string);
-		await interaction.followUp({ embeds: [embed] });
+		await interaction.reply({ embeds: [embed] });
 	}
 }

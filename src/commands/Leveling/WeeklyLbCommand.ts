@@ -10,6 +10,8 @@ export default class WeeklyLBCommand extends BaseCommand {
 		super("weeklylb", "leveling");
 	}
 	async run(client: DiscordClient, interaction: CommandInteraction) {
+		await interaction.deferReply();
+
 		const sortedUsers = sortUserXP(await getAllWeeklyUser());
 		const embeds = generateRankEmbed(interaction, sortedUsers);
 

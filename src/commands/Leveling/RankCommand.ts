@@ -11,6 +11,8 @@ export default class RankCommand extends BaseCommand {
 		super("rank", "leveling");
 	}
 	async run(client: DiscordClient, interaction: CommandInteraction) {
+		await interaction.deferReply();
+
 		let member = interaction.options.data[0]
 			? (interaction.options.data[0].member as GuildMember)
 			: (interaction.member as GuildMember);

@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Hide user input
-stty -echo
-
 # Check if ts-node command exists
 if command -v ts-node &> /dev/null; then
     # ts-node exists
@@ -19,6 +16,9 @@ else
         echo "Error: ts-node, or tsc and node commands are not installed."
     fi
 fi
+
+# Hide user input
+stty -echo
 
 # Wait for user input to exit
 read -p "Press Enter to exit..."

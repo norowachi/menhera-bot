@@ -7,7 +7,9 @@ import {
 import DiscordClient from "./client/client";
 import { registerCommands, registerEvents } from "./utils/registry";
 import { connect } from "mongoose";
-require("dotenv").config();
+import { config } from "dotenv";
+
+config();
 
 const client = new DiscordClient({
 	intents: [

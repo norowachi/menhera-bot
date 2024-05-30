@@ -28,7 +28,7 @@ export const expSystem = async (client: DiscordClient, message: Message) => {
 	const addedXp =
 		(multi.length >= 1
 			? multi.map((d) => d.xp)?.reduce((a, b) => (a || 0) + b)
-			: 0) + (guildData.exp.xp || 1);
+			: 0) * (guildData.exp.xp || 1);
 	const cooldown = guildData.exp.cooldown
 		? guildData.exp.cooldown * 1000
 		: 8 * 1000;
@@ -58,7 +58,7 @@ export const expSystem = async (client: DiscordClient, message: Message) => {
 			await initWeeklyExp(message.author.id);
 			client.guildXP.weeklyUserExp.set(message.author.id, {
 				userId: message.author.id,
-				xp: 1,
+				xp: addedXp,
 			});
 		} else {
 			client.guildXP.weeklyUserExp.set(message.author.id, {

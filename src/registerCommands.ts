@@ -510,6 +510,30 @@ const commands: ApplicationCommandData[] = [
 		name: "Report Message",
 		type: ApplicationCommandType.Message,
 	},
+	{
+		name: "report",
+		description: "Report a user",
+		options: [
+			{
+				type: ApplicationCommandOptionType.User,
+				name: "user",
+				description: "User to report",
+				required: true,
+			},
+			{
+				type: ApplicationCommandOptionType.String,
+				name: "reason",
+				description: "Reason for the report",
+				required: true,
+			},
+			{
+				type: ApplicationCommandOptionType.String,
+				name: "message",
+				description: "Message ID reference for the report",
+				required: false,
+			},
+		],
+	},
 ];
 
 client.on("ready", async () => {

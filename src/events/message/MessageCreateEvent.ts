@@ -29,16 +29,6 @@ export default class MessageEvent extends BaseEvent {
 	}
 
 	async run(client: DiscordClient, message: Message) {
-		//! mod logs became private
-		/* 
-		// if message is in mod-logs and author is dyno
-		if (
-			message.channelId === "881546015705026610" &&
-			message.author.id === "155149108183695360"
-		) {
-			await MODLOGS_StickyMessage(client, message);
-		}
-		*/
 		if (message.author.bot) return;
 		if (!message.guild) return;
 		await expSystem(client, message);
@@ -46,7 +36,10 @@ export default class MessageEvent extends BaseEvent {
 		// checking if the message contains a command
 		if (await getCommand(client, message)) return;
 
-		// if (message.guild.id === "551888982905192459") return;
+		// if user has nomemehera role, ignore
+		if (message.member?.roles.cache.has(client.nomemehera)) return;
+
+		// get all responses
 		const resps = await getResponses(message.guild.id);
 		const ResponseObj = resps.find((elm) =>
 			new RegExp(`( |^)${elm.keyword}($| )`, "i").test(

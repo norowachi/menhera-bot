@@ -20,6 +20,12 @@ import { getGuildSettings } from "../../database/functions/guildSettingsFunction
 
 export const expSystem = async (client: DiscordClient, message: Message) => {
 	if (!message.guild || !message.member) return;
+	// if the user has the no-exp role, ignore 'em
+	if (message.member.roles.cache.has(client.guildXP.role)) return;
+	// if channel is on the list, ignore
+	//! waiting for mista head mod approval
+	// if (client.guildXP.channel.includes(message.channelId)) return;
+
 	const guildData = await getGuildSettings(message.guild.id);
 	const multi = guildData.multi.filter(
 		(elm) =>
@@ -39,7 +45,7 @@ export const expSystem = async (client: DiscordClient, message: Message) => {
 			await initExp(message.author.id);
 			client.guildXP.userXP.set(message.author.id, {
 				userId: message.author.id,
-				xp: 1,
+				xp: addedXp,
 				lastTimestamp: message.createdTimestamp,
 			});
 		} else {
@@ -58,7 +64,7 @@ export const expSystem = async (client: DiscordClient, message: Message) => {
 			await initWeeklyExp(message.author.id);
 			client.guildXP.weeklyUserExp.set(message.author.id, {
 				userId: message.author.id,
-				xp: addedXp,
+				xp: 1,
 			});
 		} else {
 			client.guildXP.weeklyUserExp.set(message.author.id, {

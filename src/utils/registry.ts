@@ -31,10 +31,7 @@ export async function registerEvents(client: DiscordClient, dir: string = "") {
 			await registerEvents(client, path.join(dir, file));
 		}
 		//SET-UP-TEMP: ignore raw event for now
-		if (
-			(file.endsWith(".js") || file.endsWith(".ts")) &&
-			!file.toLowerCase().includes("raw")
-		) {
+		if (file.endsWith(".js") || file.endsWith(".ts")) {
 			const { default: Event } = await import(path.join(dir, file));
 			const event = new Event() as BaseEvent;
 			client.events.set(event.getName(), event);

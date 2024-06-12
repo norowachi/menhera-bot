@@ -24,7 +24,12 @@ export default class ReadyEvent extends BaseEvent {
 			"894044004927283261", //mudae
 			"880777835323744296", //bot-channel
 		];
+
+		client.guildXP.role = "1250541847705555024"; //no-exp role
 		client.guildXP.logChannel = "880776818527981598"; //general
+
+		client.nomemehera = "1250543297592688721";
+
 		setInterval(() => {
 			Promise.all([
 				// weekly lb reset and announcement

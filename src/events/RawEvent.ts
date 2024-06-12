@@ -12,7 +12,7 @@ import {
 const constants = {
 	enclaved: "878173412529414174", //enclaved server
 	eventLogsCategory: "1082439774968742009", //logs parent category
-	eventLogsCategory2: "1082448348369395712", //logs parent category   2
+	eventLogsCategory2: "1082448348369395712", //logs parent category 2
 };
 let events: {
 	name: string;
@@ -27,6 +27,7 @@ export default class RawEvent extends BaseEvent {
 		client: DiscordClient,
 		data: { op: number; t: string; s: number; d?: any }
 	) {
+		return;
 		if (!data || data.op != 0 || !data.t) return;
 		if (data.t == "READY") return;
 		if (
@@ -36,7 +37,7 @@ export default class RawEvent extends BaseEvent {
 			return;
 		const guild = client.guilds.cache.get(constants.enclaved);
 		if (!guild) return;
-		const eventChannel = await channel_check(guild, data);
+		const eventChannel = await channel_check(guild!, data);
 		const eventData = events.find((e) => e.name === data.t);
 		if (!eventData) {
 			events.push({ name: data.t, data: [] });

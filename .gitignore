@@ -4,8 +4,10 @@ dist
 
 # files
 *.env
-
-# test files
+*.archive
+*.log
+*.template
+*.temp
 *.test.*
 
 # lock files

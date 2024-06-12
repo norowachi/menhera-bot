@@ -1,7 +1,6 @@
 import BaseEvent from "../../utils/structures/BaseEvent";
 import DiscordClient from "../../client/client";
 import {
-	ButtonInteraction,
 	CommandInteraction,
 	GuildMemberRoleManager,
 	Interaction,

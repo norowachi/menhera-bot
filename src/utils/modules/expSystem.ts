@@ -39,7 +39,7 @@ export const expSystem = async (client: DiscordClient, message: Message) => {
 			await initExp(message.author.id);
 			client.guildXP.userXP.set(message.author.id, {
 				userId: message.author.id,
-				xp: addedXp,
+				xp: 1,
 				lastTimestamp: message.createdTimestamp,
 			});
 		} else {

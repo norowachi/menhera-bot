@@ -70,7 +70,8 @@ Menhera Bot is a private [Discord](https://discord.com) bot built for the Menher
    - if you have git
      ```sh
      npm run register
-     ```
+     ``` 
+     (Note: don't forget to `chmod -x register.sh` if you're using Linux or so)
    - else just run the file
      ```sh
      tsc && node dist/registerCommands.js

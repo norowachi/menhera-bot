@@ -62,7 +62,7 @@ export default class CustomCommand extends BaseCommand {
 				new EmbedBuilder()
 					.setTitle("New Report!")
 					.setDescription(
-						`**Reported Message:**\n\n${data.targetMessage.content}\n\n**${data.targetMessage.attachments.size} Attachments**`
+						`**Reported Message:**\n\n${data.targetMessage.content}\n\n**${data.targetMessage.attachments.size} Attachments**\n\n**Reason:**\n${modalSubmit.components[1].components[0].value}`
 					)
 					.setFields([
 						{

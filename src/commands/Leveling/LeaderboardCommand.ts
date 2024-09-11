@@ -37,7 +37,7 @@ function generateRankEmbed(
 	const msgMemberData = array.filter((f) => f.userId == interaction.user.id)[0];
 	let k = 10;
 	let p = 1;
-	for (let i = 0; i < (array.length > 15 ? 15 : array.length); i += 10) {
+	for (let i = 0; i < (array.length > 150 ? 150 : array.length); i += 10) {
 		const currentQueue = array.slice(i, k);
 		k += 10;
 		const info = currentQueue
@@ -64,7 +64,7 @@ function generateRankEmbed(
 					(msgMemberData
 						? `You: #${UserIndex(array, interaction.user.id) + 1}`
 						: "You don't have any exp") +
-					`\nPage: ${p}/${Math.ceil(array.length / 10)}`,
+					`\nPage: ${p}/${Math.ceil((array.length > 150 ? 150 : array.length) / 10)}`,
 				iconURL: interaction.user.displayAvatarURL(),
 			});
 		embeds.push(embed);

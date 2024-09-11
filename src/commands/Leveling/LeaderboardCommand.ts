@@ -13,10 +13,7 @@ export default class LeaderboardCommand extends BaseCommand {
 		await interaction.deferReply();
 
 		const sortedUsers = sortUserXP(await getAllUser());
-		const embeds = generateRankEmbed(
-			interaction,
-			sortedUsers.slice(0, 10 * 15)
-		);
+		const embeds = generateRankEmbed(interaction, sortedUsers);
 
 		if (embeds.length == 1) {
 			interaction.reply({ embeds: [embeds[0]] }).catch(() => {});
@@ -40,7 +37,7 @@ function generateRankEmbed(
 	const msgMemberData = array.filter((f) => f.userId == interaction.user.id)[0];
 	let k = 10;
 	let p = 1;
-	for (let i = 0; i < array.length; i += 10) {
+	for (let i = 0; i < (array.length > 15 ? 15 : array.length); i += 10) {
 		const currentQueue = array.slice(i, k);
 		k += 10;
 		const info = currentQueue

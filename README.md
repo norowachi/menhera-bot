@@ -106,6 +106,8 @@ by downloading the following program you agree to the following LICENSE in the L
 
 
 ## Notes & things To Remember
+For installing packages/canvas [install required dependencies first](https://github.com/Automattic/node-canvas?tab=readme-ov-file#compiling)
+
 ```js
 // Level to Exp, where "LEVEL" is an integer
 Math.floor(LEVEL ** 2 / 0.01);

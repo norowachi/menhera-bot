@@ -1,13 +1,13 @@
 import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
-import { CommandInteraction, GuildMember, EmbedBuilder } from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 
 export default class BanCommand extends BaseCommand {
 	constructor() {
 		super("ban", "moderation");
 	}
 
-	async run(client: DiscordClient, interaction: CommandInteraction) {
+	async run(client: DiscordClient, interaction: ChatInputCommandInteraction) {
 		const user = interaction.options.getUser("user", true);
 		const reason =
 			(interaction.options.get("reason", false)?.value as string) ||

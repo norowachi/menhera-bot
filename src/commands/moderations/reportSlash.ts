@@ -1,12 +1,16 @@
 import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
-import { CommandInteraction, EmbedBuilder, TextChannel } from "discord.js";
+import {
+	ChatInputCommandInteraction,
+	EmbedBuilder,
+	TextChannel,
+} from "discord.js";
 
 export default class CustomCommand extends BaseCommand {
 	constructor() {
 		super("report", "moderation");
 	}
-	async run(client: DiscordClient, data: CommandInteraction) {
+	async run(client: DiscordClient, data: ChatInputCommandInteraction) {
 		const targetUser = data.options.getUser("user", true);
 		const targetMessageId = data.options.get("message", false)?.value;
 		const reason = data.options.get("reason", true).value;

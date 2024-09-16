@@ -1,12 +1,16 @@
 import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
-import { CommandInteraction, GuildMember, EmbedBuilder } from "discord.js";
+import {
+	ChatInputCommandInteraction,
+	GuildMember,
+	EmbedBuilder,
+} from "discord.js";
 
 export default class KickCommand extends BaseCommand {
 	constructor() {
 		super("kick", "moderation");
 	}
-	async run(client: DiscordClient, interaction: CommandInteraction) {
+	async run(client: DiscordClient, interaction: ChatInputCommandInteraction) {
 		const member = interaction.options.getMember("user") as GuildMember;
 		const reason =
 			(interaction.options.get("reason", false)?.value as string) ||

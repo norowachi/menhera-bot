@@ -2,14 +2,12 @@ import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
 import {
 	ActionRowBuilder,
-	CommandInteraction,
 	EmbedBuilder,
 	MessageContextMenuCommandInteraction,
 	ModalBuilder,
 	TextChannel,
 	TextInputBuilder,
 	TextInputStyle,
-	UserContextMenuCommandInteraction,
 } from "discord.js";
 
 export default class CustomCommand extends BaseCommand {

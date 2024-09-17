@@ -28,6 +28,10 @@ const client = new DiscordClient({
 	],
 	partials: [Partials.Message, Partials.Reaction, Partials.User],
 	allowedMentions: { parse: ["roles", "users"], repliedUser: true },
+	rest: {
+		api: process.env.DISCORD_REST_PROXY || "https://discord.com/api",
+		version: "10",
+	},
 }); //.on("debug", console.log);
 
 process.on("uncaughtException", async (error: any, origin) => {

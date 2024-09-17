@@ -45,24 +45,22 @@ async function evaluate(
 		}
 		const stop = process.hrtime(start);
 		const response = clean(inspect(evaled));
-		const evmbed = new EmbedBuilder()
-			.setColor("#00FF00")
-			.setFooter({
-				text: `Time Taken: ${(stop[0] * 1e9 + stop[1]) / 1e6}ms`,
-				iconURL: client!.user!.displayAvatarURL(),
-			})
-			.setTitle("Eval")
-			.addFields([
-				{ name: `**Output:**`, value: `\`\`\`js\n${response}\n\`\`\`` },
-				{ name: `**Type:**`, value: typeof evaled },
-			]);
+		if (response.length <= 2000) {
+			const evmbed = new EmbedBuilder()
+				.setColor("#00FF00")
+				.setFooter({
+					text: `Time Taken: ${(stop[0] * 1e9 + stop[1]) / 1e6}ms`,
+					iconURL: client!.user!.displayAvatarURL(),
+				})
+				.setTitle("Eval")
+				.setDescription(`\`\`\`js\n${response}\n\`\`\``)
+				.addFields([{ name: `**Type:**`, value: typeof evaled }]);
 
-		if (response.length <= 1024) {
 			await interaction.reply({
 				embeds: [evmbed],
 				components: [XBtn],
 			});
-		} else if (response.length <= 2048) {
+		} else if (response.length <= 4000) {
 			await interaction.reply({
 				content: "```js\n" + response + "\n```",
 				components: [XBtn],
@@ -93,14 +91,12 @@ async function evaluate(
 		});
 	}
 	function clean(text: string) {
-		text = text
+		return text
 			.replace(/`/g, `\\\`${String.fromCharCode(8203)}`)
 			.replace(/@/g, `@${String.fromCharCode(8203)}`)
 			.replace(
 				new RegExp(client!.token!, "gi"),
 				`NrzaMyOTI4MnU1NT3oDA1rTk4.pPizb1g.hELpb6PAi1Pewp3wAwVseI72Eo`
-			)
-			.replace(/interaction\.reply/g, "channel.send");
-		return text;
+			);
 	}
 }

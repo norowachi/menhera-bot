@@ -36,8 +36,8 @@ export default class MessageEvent extends BaseEvent {
 		// checking if the message contains a command
 		if (await getCommand(client, message)) return;
 
-		// if user has nomemehera role, ignore
-		if (message.member?.roles.cache.has(client.nomemehera)) return;
+		// if user does not have memehera role, ignore
+		if (!message.member?.roles.cache.has(client.nomemehera)) return;
 
 		// get all responses
 		const resps = await getResponses(message.guild.id);

@@ -27,7 +27,7 @@ export default class CustomCommand extends BaseCommand {
 							.setPlaceholder(
 								`${
 									data.targetMessage.content.length > 1
-										? data.targetMessage.content
+										? data.targetMessage.content.length > 100 ? data.targetMessage.content.slice(0, 100) : data.targetMessage.content
 										: "-"
 								}`
 							)
@@ -55,7 +55,7 @@ export default class CustomCommand extends BaseCommand {
 		}
 
 		(client.channels.cache.get("1122654657915912307") as TextChannel).send({
-			//content: "<@&880737692864888843>", //ping mods
+			content: data.targetMessage.url,
 			embeds: [
 				new EmbedBuilder()
 					.setTitle("New Report!")

@@ -1,4 +1,5 @@
 # Menhera Bot
+
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -21,10 +22,12 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#starting-the-bot">Startup</a></li>
       </ul>
     </li>
-    
-    
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#notes--things-to-remember">Notes</a></li>
   </ol>
 </details>
 
@@ -56,7 +59,7 @@ Menhera Bot is a private [Discord](https://discord.com) bot built for the Menher
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/Noro95/menhera-bot.git
+   git clone https://github.com/norowachi/menhera-bot.git
    ```
 2. Install NPM packages
    ```sh
@@ -65,14 +68,14 @@ Menhera Bot is a private [Discord](https://discord.com) bot built for the Menher
 3. Enter your credentials in `.env` according to `.env-example`
 
 ### Starting The Bot
+
 1. Install [Git](https://git-scm.com/downloads) and configure it to be able to use bash scripts and commands (OPTIONAL)
 2. Register the commands
-   - if you have git
-     ```sh
-     npm run register
-     ``` 
-     (Note: don't forget to `chmod -x register.sh` if you're using Linux or so)
-   - else just run the file
+   ```sh
+   npm run register
+   ```
+   (Note: don't forget to mark `register.sh` as executable)
+   - if the method above doesn't work, no worries just run the file
      ```sh
      tsc && node dist/registerCommands.js
      ```
@@ -80,7 +83,8 @@ Menhera Bot is a private [Discord](https://discord.com) bot built for the Menher
    ```sh
    npm start
    ```
-* if you have any issues do not hesitate to contact us or create an issue in this repo, but do note that this is not intended for public use and could have many hardcoded stuff
+
+- if you have any issues do not hesitate to contact us or create an issue in this repo, but do note that this is not intended for public use and may have many hardcoded constants
 <!-- CONTRIBUTING -->
 
 ## Contributing
@@ -104,8 +108,8 @@ by downloading the following program you agree to the following LICENSE in the L
 [Menherachan Hub](https://discord.gg/menhera)
 [Menherachan Minihub](https://discord.gg/menherachan)
 
-
 ## Notes & things To Remember
+
 For installing packages/canvas [install required dependencies first](https://github.com/Automattic/node-canvas?tab=readme-ov-file#compiling)
 
 ```js

@@ -11,7 +11,7 @@ else
     # Check if tsc and node commands exist
     if command -v tsc &> /dev/null && command -v node &> /dev/null; then
         # tsc and node commands exist
-        tsc src/registerCommands.ts && node dist/registerCommands.js
+        tsc && node dist/registerCommands.js
     else
         echo "Error: ts-node, or tsc and node commands are not installed."
     fi

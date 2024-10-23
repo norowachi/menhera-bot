@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@types/node':
-        specifier: ^20.11.20
-        version: 20.16.5
       canvas:
         specifier: ^2.8.0
         version: 2.11.2
@@ -36,6 +33,9 @@ importers:
       '@types/ms':
         specifier: ^0.7.31
         version: 0.7.34
+      '@types/node':
+        specifier: ^20.11.20
+        version: 20.16.5
 
 packages:
 

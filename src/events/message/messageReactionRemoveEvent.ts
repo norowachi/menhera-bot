@@ -31,7 +31,7 @@ export default class messageReactionRemoveEvent extends BaseEvent {
 			message.author.id === client.user?.id
 		)
 			return;
-		//message is not sent within the last 7 days (too old)
+		// if message is not sent within the last 7 days (too old) ignore
 		if (
 			Date.now() / 1000 - reaction.message.createdTimestamp >
 			1000 * 60 * 60 * 24 * 7
@@ -49,15 +49,17 @@ export default class messageReactionRemoveEvent extends BaseEvent {
 		];
 		if (!myPerms?.has(neededPerms)) {
 			if (myPerms?.has("SendMessages")) {
-				message.channel.send({
-					content: `Make sure i have **${neededPerms
-						.slice(0, neededPerms.length - 2)
-						.map((perm) => `\`${perm.toString()}\``)
-						.join(", ")} and ${neededPerms[
-						neededPerms.length - 1
-					].toString()}**`,
-				});
+				//? optional error message, uncomment if needed
+				// message.channel.send({
+				// 	content: `Make sure i have **${neededPerms
+				// 		.slice(0, neededPerms.length - 2)
+				// 		.map((perm) => `\`${perm.toString()}\``)
+				// 		.join(", ")} and \`${neededPerms[
+				// 		neededPerms.length - 1
+				// 	].toString()}\`**`,
+				// });
 			}
+			return;
 		}
 
 		let starChannel = await client.channels.fetch(channel);

@@ -4,7 +4,6 @@
 if command -v ts-node &> /dev/null; then
     # ts-node exists
     ts-node src/registerCommands.ts
-tsc
 else
     # ts-node does not exist
     echo "Warning: ts-node is not installed, using tsc && node instead"

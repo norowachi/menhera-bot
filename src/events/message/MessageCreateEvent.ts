@@ -3,7 +3,6 @@ import { Message, TextChannel } from "discord.js";
 import DiscordClient from "../../client/client";
 import { expSystem } from "../../utils/modules/expSystem";
 import { getResponses } from "../../database/functions/customRespFunctions";
-import COMMANDS from "./commands/index";
 
 let cdMap: Map<string, { respId: string; lastUsed: number }[]> = new Map();
 // Map<ChannelId, [{respId, LastUsedDate}]>
@@ -32,9 +31,6 @@ export default class MessageEvent extends BaseEvent {
 		if (message.author.bot) return;
 		if (!message.guild) return;
 		await expSystem(client, message);
-
-		// checking if the message contains a command
-		if (await getCommand(client, message)) return;
 
 		// if user does not have memehera role, ignore
 		if (!message.member?.roles.cache.has(client.nomemehera)) return;
@@ -126,35 +122,6 @@ async function MODLOGS_StickyMessage(client: DiscordClient, message: Message) {
 	return await (message.channel as TextChannel).send(stickymsg);
 }
 */
-
-// true = do not lock for responses | false = look for responses
-async function getCommand(client: DiscordClient, message: Message) {
-	// regexp for replacing prefix/mention
-	const PrefixRegex = new RegExp(
-		`^(${client.prefix}|<@!?${client.user?.id}>)(\s+)?`,
-		"i"
-	);
-	//commands area (if msg starts with prefix or mention)
-	if (!PrefixRegex.test(message.content)) return false;
-	let [name, ...args] = message.content.replace(PrefixRegex, "").split(/\s+/g);
-	if (!name) return false;
-	// for case-insesitivity
-	name = name.toLowerCase();
-	// getting the command
-	const command = COMMANDS.find(
-		(data) =>
-			data.name === name ||
-			(data.aliases != undefined ? data.aliases!.includes(name) : false)
-	);
-	if (!command) return false;
-	if (command.requireArgs && !args.length) {
-		message.reply({ content: "This command requires extra args" });
-		return true;
-	}
-	// run and run (exit)
-	await command.run(client, message, name, args);
-	return true;
-}
 
 // True = on cd
 // False = not on cd

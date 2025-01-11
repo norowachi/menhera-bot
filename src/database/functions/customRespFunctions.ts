@@ -1,4 +1,5 @@
-import { CustomResp } from "../../utils/GlobalTypes";
+import { Document } from "mongoose";
+import { CustomResp, CustomRespData } from "../../utils/GlobalTypes";
 import { custom } from "../schemas/custom";
 
 export const initCustomResp = async (guildId: string, data: CustomResp) => {
@@ -41,13 +42,14 @@ export const addResponse = async (guildId: string, data: CustomResp) => {
 
 export const EditResponse = async (guildId: string, data: CustomResp) => {
 	try {
-		const CData = await custom.findOne({ guildId });
+		const CData = await custom.findOne<CustomRespData & Document>({ guildId });
 		if (!CData) {
 			await initCustomResp(guildId, data);
 			return true;
 		}
-		const index = CData.responses.findIndex((r) => r.id === data.id);
-		CData.responses[index] = {
+		const index = CData.responses?.findIndex((r) => r.id === data.id);
+		if (!index) return false;
+		CData.responses![index] = {
 			id: data.id,
 			keyword: data.keyword,
 			reaction: data.reaction || "",

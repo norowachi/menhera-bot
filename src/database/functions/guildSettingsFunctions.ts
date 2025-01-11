@@ -1,5 +1,5 @@
 import { guildData } from "../../utils/GlobalTypes";
-import { Types } from "mongoose";
+import { Document, Types } from "mongoose";
 import { guilds } from "../schemas/guildSettings";
 
 export const initGuildSettings = async (guildId: string): Promise<any> => {
@@ -46,27 +46,17 @@ export const ModifyMulti = async (
 	id: string,
 	xp?: number
 ) => {
-	const guildData = await guilds.findOne({ guildId });
+	const guildData = await guilds.findOne<guildData & Document>({ guildId });
 	if (!guildData) return false;
 	switch (type) {
 		case "add": {
-			if (
-				(guildData.multi as Array<{ id: string; xp: number }>).some(
-					(d) => d.id == id
-				)
-			)
-				return false;
-			guildData.multi.push({ id: id, xp: xp });
+			if (guildData.multi.some((d) => d.id == id)) return false;
+			guildData.multi.push({ id: id, xp: xp ?? 0 });
 			guildData.save();
 			return true;
 		}
 		case "edit": {
-			if (
-				!(guildData.multi as Array<{ id: string; xp: number }>).some(
-					(d) => d.id == id
-				)
-			)
-				return false;
+			if (!guildData.multi.some((d) => d.id == id)) return false;
 			if (!xp) return false;
 			await guilds.updateOne(
 				{ guildId: guildId, "multi.id": id },
@@ -75,15 +65,8 @@ export const ModifyMulti = async (
 			return true;
 		}
 		case "remove": {
-			if (
-				!(guildData.multi as Array<{ id: string; xp: number }>).some(
-					(d) => d.id == id
-				)
-			)
-				return false;
-			guildData.multi = (
-				guildData.multi as Array<{ id: string; xp: number }>
-			).filter((d) => d.id !== id);
+			if (!guildData.multi.some((d) => d.id == id)) return false;
+			guildData.multi = guildData.multi.filter((d) => d.id !== id);
 			guildData.save();
 			return true;
 		}

@@ -3,6 +3,7 @@ import DiscordClient from "../../client/client";
 import { GuildMember, AttachmentBuilder, TextChannel, Guild } from "discord.js";
 import { Canvas, createCanvas, loadImage } from "canvas";
 import { IsMenheraServer } from "../../utils/functions";
+import path from "path";
 
 const HubChannelId = "554449488693952512"; //welcome channel id - of menhera hub
 const LoungeChannelId = "763799665995939870"; //welcome channel id - of menhera lounge
@@ -36,7 +37,7 @@ async function getWelcomeCard(member: GuildMember) {
 	const canvas = createCanvas(845, 475);
 	const ctx = canvas.getContext("2d");
 	const background = await loadImage(
-		"././././images/server_invite_background.png"
+		path.join(process.cwd(), "images/server_invite_background.png")
 	);
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 	ctx.strokeStyle = "#74037b";

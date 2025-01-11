@@ -127,7 +127,9 @@ export const levelUpMessage = async (
 	return await LevelUpRole(member, level);
 };
 
-export const sortUserXP = (data: Array<{ userId?: string; xp?: number }>) => {
+export const sortUserXP = (
+	data: Array<{ userId?: string; xp?: number }>
+) => {
 	return data.sort((a, b) => b.xp! - a.xp!);
 };
 

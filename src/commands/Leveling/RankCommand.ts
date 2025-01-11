@@ -1,6 +1,6 @@
 import BaseCommand from "../../utils/structures/BaseCommand";
 import DiscordClient from "../../client/client";
-import { CommandInteraction, GuildMember } from "discord.js";
+import { AttachmentBuilder, CommandInteraction, GuildMember } from "discord.js";
 import { getAllUser } from "../../database/functions/userexpFunction";
 import { sortUserXP } from "../../utils/modules/expSystem";
 import { Rank } from "../../utils/modules/rankAttachment";
@@ -10,7 +10,7 @@ export default class RankCommand extends BaseCommand {
 	constructor() {
 		super("rank", "leveling");
 	}
-	async run(client: DiscordClient, interaction: CommandInteraction) {
+	async run(_: DiscordClient, interaction: CommandInteraction) {
 		await interaction.deferReply();
 
 		let member = interaction.options.data[0]
@@ -26,17 +26,12 @@ export default class RankCommand extends BaseCommand {
 			});
 			return;
 		}
+		const level = Math.floor(Math.sqrt(sortedUser[rank - 1].xp || 0) * 0.1);
 		const data = {
 			xp: sortedUser[rank - 1].xp,
-			level: Math.floor(Math.sqrt(sortedUser[rank - 1].xp || 0) * 0.1),
-			requiredXP:
-				((Math.floor(Math.sqrt(sortedUser[rank - 1].xp || 0) * 0.1) + 1) *
-					(Math.floor(Math.sqrt(sortedUser[rank - 1].xp || 0) * 0.1) + 1)) /
-				0.01,
-			previousXP:
-				(Math.floor(Math.sqrt(sortedUser[rank - 1].xp || 0) * 0.1) *
-					Math.floor(Math.sqrt(sortedUser[rank - 1].xp || 0) * 0.1)) /
-				0.01,
+			level,
+			requiredXP: (level + 1) ** 2 / 0.01,
+			previousXP: (level * 0.1) ** 2 / 0.01,
 		};
 		const rankCard = new Rank()
 			.setAvatar(member.user.displayAvatarURL({ extension: "png" }))
@@ -55,8 +50,10 @@ export default class RankCommand extends BaseCommand {
 			.setOverlay("#FFFFFF", 0, false)
 			.setLevelColor(member.displayHexColor, member.displayHexColor)
 			.setRankColor(member.displayHexColor, member.displayHexColor);
-		const rankCardAttachment = await rankCard.build();
-		await interaction.followUp({
+		const rankCardAttachment = new AttachmentBuilder(
+			await rankCard.build()
+		).setName("rank.png");
+		await interaction.editReply({
 			files: [rankCardAttachment],
 		});
 	}

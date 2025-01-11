@@ -1,6 +1,7 @@
 import { EmbedBuilder, TextChannel } from "discord.js";
 import DiscordClient from "../../client/client";
 import { weeklyUserExp as weekly } from "../schemas/WeeklyExpSchema";
+import { WeeklyUserXP } from "../../utils/GlobalTypes";
 
 export const setWeeklyExp = async (userId: string, xp: number) => {
 	try {
@@ -23,7 +24,7 @@ export const initWeeklyExp = async (userId: string) => {
 };
 
 export const getAllWeeklyUser = async () => {
-	return await weekly.find();
+	return await weekly.find<WeeklyUserXP>();
 };
 
 export const DelWeeklyUserExp = async (id: string) => {

@@ -9,7 +9,7 @@ export default class LeaderboardCommand extends BaseCommand {
 	constructor() {
 		super("leaderboard", "leveling");
 	}
-	async run(client: DiscordClient, interaction: CommandInteraction) {
+	async run(_: DiscordClient, interaction: CommandInteraction) {
 		await interaction.deferReply();
 
 		const sortedUsers = sortUserXP(await getAllUser());

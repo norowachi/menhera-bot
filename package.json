@@ -12,14 +12,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/norowachi/menhera-bot-public.git"
+		"url": "git+https://github.com/norowachi/menhera-bot.git"
 	},
-	"author": "Noro <contact@norowa.dev>",
+	"author": "Noro <contact@noro.cc>",
 	"license": "GPL-3.0-only",
 	"bugs": {
-		"url": "https://github.com/norowachi/menhera-bot-public/issues"
+		"url": "https://github.com/norowachi/menhera-bot/issues"
 	},
-	"homepage": "https://github.com/norowachi/menhera-bot-public#readme",
+	"homepage": "https://github.com/norowachi/menhera-bot#readme",
 	"dependencies": {
 		"canvas": "^3.0.1",
 		"discord-api-types": "^0.37.115",

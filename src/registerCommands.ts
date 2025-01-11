@@ -265,7 +265,7 @@ const commands: ApplicationCommandData[] = [
 				required: true,
 			},
 		],
-		defaultMemberPermissions: ["Administrator"],
+		
 	},
 	{
 		name: "draw",

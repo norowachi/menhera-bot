@@ -151,19 +151,38 @@ const commands: ApplicationCommandData[] = [
 		defaultMemberPermissions: ["KickMembers"],
 	},
 	{
-		name: "givelevel",
-		description: "Give a level to a user",
+		name: "addlevel",
+		description: "add/substract from a user's level",
 		options: [
 			{
 				type: ApplicationCommandOptionType.User,
 				name: "user",
-				description: "User to give level",
+				description: "User to modify",
 				required: true,
 			},
 			{
 				type: ApplicationCommandOptionType.Number,
 				name: "level",
-				description: "Level to give",
+				description: "Level to change",
+				required: true,
+			},
+		],
+		defaultMemberPermissions: ["ModerateMembers"],
+	},
+	{
+		name: "setlevel",
+		description: "Set a user's level",
+		options: [
+			{
+				type: ApplicationCommandOptionType.User,
+				name: "user",
+				description: "User to modify",
+				required: true,
+			},
+			{
+				type: ApplicationCommandOptionType.Number,
+				name: "level",
+				description: "Level to set",
 				required: true,
 			},
 		],
@@ -265,7 +284,6 @@ const commands: ApplicationCommandData[] = [
 				required: true,
 			},
 		],
-		
 	},
 	{
 		name: "draw",

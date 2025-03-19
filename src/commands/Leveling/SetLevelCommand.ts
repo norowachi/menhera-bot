@@ -11,12 +11,16 @@ import { levelUpMessage } from "../../utils/modules/expSystem";
 
 export default class GiveLevelCommand extends BaseCommand {
 	constructor() {
-		super("givelevel", "leveling");
+		super("setlevel", "leveling");
 	}
 	async run(client: DiscordClient, interaction: CommandInteraction) {
 		const member = interaction.options.data[0].member as GuildMember;
-		const level = interaction.options.data[1].value as number;
+		const newLevel = interaction.options.data[1].value as number;
 		const guild = interaction.guild as Guild;
+		if (newLevel < 0) {
+			await interaction.reply({ content: "Cannot set level to negative" });
+			return;
+		}
 		if (!member || !member.user) {
 			await interaction.reply({
 				content: "Couldn't find desired member",
@@ -24,10 +28,6 @@ export default class GiveLevelCommand extends BaseCommand {
 			return;
 		}
 		const userXP = await getExp(member.user.id);
-		if (level === 0) {
-			await interaction.reply({ content: "Cannot add 0 levels" });
-			return;
-		}
 		if (!userXP) {
 			const embed = new EmbedBuilder()
 				.setColor("Red")
@@ -35,13 +35,6 @@ export default class GiveLevelCommand extends BaseCommand {
 					"This user is not in my database. They need to send message first to get registered"
 				);
 			await interaction.reply({ embeds: [embed] });
-			return;
-		}
-		const newLevel = Math.floor(Math.sqrt(userXP.xp || 0) * 0.1) + level;
-		if (newLevel < 0) {
-			await interaction.reply({
-				content: "Level cannot be less than 0",
-			});
 			return;
 		}
 		const newXP = Math.floor(newLevel ** 2 / 0.01);

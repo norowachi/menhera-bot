@@ -1154,13 +1154,11 @@ export class Rank {
 		// If required XP is 0 or less, avoid division by zero
 		if (rx <= 0) return 1;
 
-		console.log(cx, rx, px);
 		// If current XP exceeds the requirement, fill up the bar
 		if (cx > rx) return barWidth;
 
 		// Calculate partial progress
 		let width = (barWidth * (cx - px)) / (rx - px);
-		console.log(width, barWidth);
 		if (width > barWidth) {
 			width = barWidth;
 		}

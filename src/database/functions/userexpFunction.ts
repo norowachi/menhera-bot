@@ -2,7 +2,7 @@ import { Document } from "mongoose";
 import { userExp } from "../schemas/UserExpSchema";
 import { userXP } from "../../utils/GlobalTypes";
 
-export const addExp = async (userId: string, xp: number) => {
+export const setExp = async (userId: string, xp: number) => {
 	userExp.updateOne({ userId }, { $set: { xp: xp } }).catch(console.error);
 };
 

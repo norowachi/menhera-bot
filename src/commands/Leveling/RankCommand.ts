@@ -31,7 +31,7 @@ export default class RankCommand extends BaseCommand {
 			xp: sortedUser[rank - 1].xp,
 			level,
 			requiredXP: (level + 1) ** 2 / 0.01,
-			previousXP: (level * 0.1) ** 2 / 0.01,
+			previousXP: level ** 2 / 0.01,
 		};
 		const rankCard = new Rank()
 			.setAvatar(member.user.displayAvatarURL({ extension: "png" }))

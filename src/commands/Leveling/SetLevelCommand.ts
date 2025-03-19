@@ -6,7 +6,7 @@ import {
 	GuildMember,
 	EmbedBuilder,
 } from "discord.js";
-import { addExp, getExp } from "../../database/functions/userexpFunction";
+import { setExp, getExp } from "../../database/functions/userexpFunction";
 import { levelUpMessage } from "../../utils/modules/expSystem";
 
 export default class GiveLevelCommand extends BaseCommand {
@@ -38,7 +38,7 @@ export default class GiveLevelCommand extends BaseCommand {
 			return;
 		}
 		const newXP = Math.floor(newLevel ** 2 / 0.01);
-		await addExp(member.user.id, newXP);
+		await setExp(member.user.id, newXP);
 		await levelUpMessage(newLevel, guild, member, client);
 		if (client.guildXP.userXP.has(member.user.id)) {
 			client.guildXP.userXP.get(member.user.id)!.xp = newXP;

@@ -7,7 +7,7 @@ import {
 	TextChannel,
 } from "discord.js";
 import {
-	addExp,
+	setExp,
 	getExp,
 	initExp,
 } from "../../database/functions/userexpFunction";
@@ -78,7 +78,7 @@ export const expSystem = async (client: DiscordClient, message: Message) => {
 	const WeeklyUserExp = client.guildXP.weeklyUserExp.get(message.author.id)!;
 
 	if (message.createdTimestamp - userXP.lastTimestamp < cooldown) return;
-	await addExp(message.author.id, userXP.xp + addedXp);
+	await setExp(message.author.id, userXP.xp + addedXp);
 	await setWeeklyExp(message.author.id, WeeklyUserExp.xp + 1);
 	const oldLevel = Math.floor(Math.sqrt(userXP.xp) * 0.1);
 	const newLevel = Math.floor(Math.sqrt(userXP.xp + addedXp) * 0.1);
@@ -127,9 +127,7 @@ export const levelUpMessage = async (
 	return await LevelUpRole(member, level);
 };
 
-export const sortUserXP = (
-	data: Array<{ userId?: string; xp?: number }>
-) => {
+export const sortUserXP = (data: Array<{ userId?: string; xp?: number }>) => {
 	return data.sort((a, b) => b.xp! - a.xp!);
 };
 

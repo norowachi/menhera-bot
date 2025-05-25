@@ -32,7 +32,7 @@ const client = new DiscordClient({
     api: process.env.DISCORD_REST_PROXY || 'https://discord.com/api',
     version: '10',
   },
-}); //.on("debug", console.log);
+}).on('debug', console.log);
 
 process.on('uncaughtException', async (error: any, origin) => {
   new WebhookClient({
@@ -52,6 +52,7 @@ process.on('uncaughtException', async (error: any, origin) => {
       console.log('Connected to DB');
     })
     .catch(console.error);
+  console.log('Registering events and commands...');
   await registerEvents(client, '../events');
   await registerCommands(client, '../commands');
   await client.login(process.env.TOKEN);

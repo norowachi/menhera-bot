@@ -1,18 +1,18 @@
-import { CommandInteraction, Interaction, Message } from "discord.js";
-import DiscordClient from "../../client/client";
+import { CommandInteraction } from 'discord.js';
+import DiscordClient from '../../client/client';
 
 export default abstract class BaseCommand {
-    constructor(private name: string, private category: string) {}
+  constructor(
+    private name: string,
+    private category: string,
+  ) {}
 
-    getName(): string {
-        return this.name;
-    }
-    getCategory(): string {
-        return this.category;
-    }
+  getName(): string {
+    return this.name;
+  }
+  getCategory(): string {
+    return this.category;
+  }
 
-    abstract run(
-        client: DiscordClient,
-        data: CommandInteraction
-    ): Promise<void>;
+  abstract run(client: DiscordClient, data: CommandInteraction): Promise<void>;
 }

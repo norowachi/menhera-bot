@@ -1,64 +1,62 @@
 import {
-	Client,
-	ClientOptions,
-	Collection,
-	Role,
-	Snowflake,
-	TextChannel,
-	User,
-} from "discord.js";
-import BaseEvent from "../utils/structures/BaseEvent";
-import BaseCommand from "../utils/structures/BaseCommand";
-import { expData, moderationMap, userXP } from "../utils/GlobalTypes";
+  Client,
+  ClientOptions,
+  Collection,
+  Role,
+  Snowflake,
+  TextChannel,
+} from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import BaseCommand from '../utils/structures/BaseCommand';
+import { expData, moderationMap, userXP } from '../utils/GlobalTypes';
 
 export default class DiscordClient extends Client {
-	private _commands = new Collection<string, BaseCommand>();
-	private _events = new Collection<string, BaseEvent>();
-	private _prefix: string = "m.";
-	private _logChannel!: TextChannel;
-	private _muteRole!: Role;
-	
-	public mutes = new Map<Snowflake, moderationMap>();
-	public guildXP: expData = {
-		channel: [],
-		logChannel: "",
-		role: "",
-		userXP: new Map<string, userXP>(),
-		weeklyUserExp: new Map<string, userXP>(),
-	};
+  private _commands = new Collection<string, BaseCommand>();
+  private _events = new Collection<string, BaseEvent>();
+  private _prefix: string = 'm.';
+  private _logChannel!: TextChannel;
+  private _muteRole!: Role;
 
-	public nomemehera = "";
-	constructor(options: ClientOptions) {
-		super(options);
-	}
+  public mutes = new Map<Snowflake, moderationMap>();
+  public guildXP: expData = {
+    channel: [],
+    logChannel: '',
+    role: '',
+    userXP: new Map<string, userXP>(),
+    weeklyUserExp: new Map<string, userXP>(),
+  };
 
-	get commands(): Collection<string, BaseCommand> {
-		return this._commands;
-	}
-	get events(): Collection<string, BaseEvent> {
-		return this._events;
-	}
-	get prefix(): string {
-		return this._prefix;
-	}
+  constructor(options: ClientOptions) {
+    super(options);
+  }
 
-	set prefix(prefix: string) {
-		this._prefix = prefix;
-	}
+  get commands(): Collection<string, BaseCommand> {
+    return this._commands;
+  }
+  get events(): Collection<string, BaseEvent> {
+    return this._events;
+  }
+  get prefix(): string {
+    return this._prefix;
+  }
 
-	get logChannel(): TextChannel {
-		return this._logChannel;
-	}
+  set prefix(prefix: string) {
+    this._prefix = prefix;
+  }
 
-	set logChannel(channel: TextChannel) {
-		this._logChannel = channel;
-	}
+  get logChannel(): TextChannel {
+    return this._logChannel;
+  }
 
-	get muteRole(): Role {
-		return this._muteRole;
-	}
+  set logChannel(channel: TextChannel) {
+    this._logChannel = channel;
+  }
 
-	set muteRole(role: Role) {
-		this._muteRole = role;
-	}
+  get muteRole(): Role {
+    return this._muteRole;
+  }
+
+  set muteRole(role: Role) {
+    this._muteRole = role;
+  }
 }

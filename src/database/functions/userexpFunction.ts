@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
-import { userExp } from '../schemas/UserExpSchema';
-import { userXP } from '../../utils/GlobalTypes';
+import { userExp } from '../schemas/UserExpSchema.js';
+import { userXP } from '../../utils/GlobalTypes.js';
 
 export const setExp = async (userId: string, xp: number) => {
   userExp.updateOne({ userId }, { $set: { xp: xp } }).catch(console.error);

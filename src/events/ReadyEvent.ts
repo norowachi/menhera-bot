@@ -1,12 +1,12 @@
-import BaseEvent from '../utils/structures/BaseEvent';
-import DiscordClient from '../client/client';
+import BaseEvent from '../utils/structures/BaseEvent.js';
+import DiscordClient from '../client/client.js';
 import { EmbedBuilder, TextChannel } from 'discord.js';
 import {
   getWeeklyTimer,
   initWeeklyTimer,
   ResetWeekly,
-} from '../database/functions/weeklyuserexpFunctions';
-import { getBdays } from '../database/functions/birthday';
+} from '../database/functions/weeklyuserexpFunctions.js';
+import { getBdays } from '../database/functions/birthday.js';
 
 export default class ReadyEvent extends BaseEvent {
   constructor() {

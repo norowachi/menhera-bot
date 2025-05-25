@@ -1,4 +1,4 @@
-import { roles } from '../schemas/RolesSchema';
+import { roles } from '../schemas/RolesSchema.js';
 
 export const getRoles = async (messageId: string) => {
   const Data = await roles.findOne({ messageId });

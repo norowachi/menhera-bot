@@ -13,7 +13,7 @@ import {
   PartialMessage,
   Awaitable,
 } from 'discord.js';
-import DiscordClient from '../client/client';
+import DiscordClient from '../client/client.js';
 
 export async function PageButtonInteraction(
   embeds: EmbedBuilder[],

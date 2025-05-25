@@ -1,9 +1,9 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import { CommandInteraction, EmbedBuilder } from 'discord.js';
-import { getAllWeeklyUser } from '../../database/functions/weeklyuserexpFunctions';
-import { sortUserXP } from '../../utils/modules/expSystem';
-import { PageButtonInteraction } from '../../utils/functions';
+import { getAllWeeklyUser } from '../../database/functions/weeklyuserexpFunctions.js';
+import { sortUserXP } from '../../utils/modules/expSystem.js';
+import { PageButtonInteraction } from '../../utils/functions.js';
 
 export default class WeeklyLBCommand extends BaseCommand {
   constructor() {

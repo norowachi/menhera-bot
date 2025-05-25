@@ -1,8 +1,8 @@
-import BaseEvent from '../../utils/structures/BaseEvent';
-import DiscordClient from '../../client/client';
+import BaseEvent from '../../utils/structures/BaseEvent.js';
+import DiscordClient from '../../client/client.js';
 import { GuildMember, AttachmentBuilder, TextChannel } from 'discord.js';
 import { Canvas, createCanvas, loadImage } from 'canvas';
-import { IsMenheraServer } from '../../utils/functions';
+import { IsMenheraServer } from '../../utils/functions.js';
 import path from 'path';
 
 const HubChannelId = '554449488693952512'; //welcome channel id - of menhera hub

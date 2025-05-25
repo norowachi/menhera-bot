@@ -7,7 +7,7 @@ import {
   Interaction,
   StringSelectMenuBuilder,
 } from 'discord.js';
-import { getRoles } from '../../database/functions/rolesFunction';
+import { getRoles } from '../../database/functions/rolesFunction.js';
 
 export async function showRuleMenu(int: ButtonInteraction) {
   try {

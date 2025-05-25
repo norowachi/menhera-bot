@@ -1,7 +1,7 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import { CommandInteraction, EmbedBuilder } from 'discord.js';
-import { editGuildSettings } from '../../database/functions/guildSettingsFunctions';
+import { editGuildSettings } from '../../database/functions/guildSettingsFunctions.js';
 
 export default class ModifiersCommand extends BaseCommand {
   constructor() {

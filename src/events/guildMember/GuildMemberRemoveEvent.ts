@@ -1,7 +1,7 @@
-import BaseEvent from '../../utils/structures/BaseEvent';
-import DiscordClient from '../../client/client';
+import BaseEvent from '../../utils/structures/BaseEvent.js';
+import DiscordClient from '../../client/client.js';
 import { EmbedBuilder, GuildMember, TextChannel } from 'discord.js';
-import { IsMenheraServer } from '../../utils/functions';
+import { IsMenheraServer } from '../../utils/functions.js';
 // import { DelUserExp } from "../../database/functions/userexpFunction";
 
 export default class GuildMemberRemoveEvent extends BaseEvent {

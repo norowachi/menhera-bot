@@ -6,9 +6,9 @@ import {
   Snowflake,
   TextChannel,
 } from 'discord.js';
-import BaseEvent from '../utils/structures/BaseEvent';
-import BaseCommand from '../utils/structures/BaseCommand';
-import { expData, moderationMap, userXP } from '../utils/GlobalTypes';
+import BaseEvent from '../utils/structures/BaseEvent.js';
+import BaseCommand from '../utils/structures/BaseCommand.js';
+import { expData, moderationMap, userXP } from '../utils/GlobalTypes.js';
 
 export default class DiscordClient extends Client {
   private _commands = new Collection<string, BaseCommand>();

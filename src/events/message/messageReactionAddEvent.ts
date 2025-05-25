@@ -1,5 +1,5 @@
-import BaseEvent from '../../utils/structures/BaseEvent';
-import DiscordClient from '../../client/client';
+import BaseEvent from '../../utils/structures/BaseEvent.js';
+import DiscordClient from '../../client/client.js';
 import {
   ChannelType,
   Message,
@@ -8,7 +8,7 @@ import {
   TextChannel,
   User,
 } from 'discord.js';
-import { SendStarMessage } from '../../utils/functions';
+import { SendStarMessage } from '../../utils/functions.js';
 
 export default class messageReactionAddEvent extends BaseEvent {
   constructor() {

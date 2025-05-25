@@ -1,10 +1,10 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import { CommandInteraction, EmbedBuilder } from 'discord.js';
 import {
   ResetWeekly,
   SundayAT8,
-} from '../../database/functions/weeklyuserexpFunctions';
+} from '../../database/functions/weeklyuserexpFunctions.js';
 
 export default class ResetWeeklyCommand extends BaseCommand {
   constructor() {

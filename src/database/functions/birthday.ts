@@ -1,4 +1,4 @@
-import { birthdays } from '../schemas/birthday';
+import { birthdays } from '../schemas/birthday.js';
 
 async function init(userId: string, bday: string) {
   try {

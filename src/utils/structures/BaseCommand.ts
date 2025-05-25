@@ -1,5 +1,5 @@
 import { CommandInteraction } from 'discord.js';
-import DiscordClient from '../../client/client';
+import DiscordClient from '../../client/client.js';
 
 export default abstract class BaseCommand {
   constructor(

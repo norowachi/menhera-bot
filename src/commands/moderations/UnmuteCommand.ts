@@ -1,7 +1,7 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import { CommandInteraction, GuildMember, EmbedBuilder } from 'discord.js';
-import { removeModeration } from '../../database/functions/moderationFunction';
+import { removeModeration } from '../../database/functions/moderationFunction.js';
 
 export default class UnmuteCommand extends BaseCommand {
   constructor() {

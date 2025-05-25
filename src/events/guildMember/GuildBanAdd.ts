@@ -1,7 +1,7 @@
-import BaseEvent from '../../utils/structures/BaseEvent';
-import DiscordClient from '../../client/client';
+import BaseEvent from '../../utils/structures/BaseEvent.js';
+import DiscordClient from '../../client/client.js';
 import { GuildBan } from 'discord.js';
-import { IsMenheraServer } from '../../utils/functions';
+import { IsMenheraServer } from '../../utils/functions.js';
 
 export default class GuildBanAddEvent extends BaseEvent {
   constructor() {

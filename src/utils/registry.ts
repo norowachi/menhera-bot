@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { promises as fs } from 'fs';
-import DiscordClient from '../client/client';
-import BaseEvent from './structures/BaseEvent';
+import DiscordClient from '../client/client.js';
+import BaseEvent from './structures/BaseEvent.js';
 
 export async function registerCommands(
   client: DiscordClient,

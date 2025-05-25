@@ -1,7 +1,7 @@
 import { EmbedBuilder, TextChannel } from 'discord.js';
-import DiscordClient from '../../client/client';
-import { weeklyUserExp as weekly } from '../schemas/WeeklyExpSchema';
-import { WeeklyUserXP } from '../../utils/GlobalTypes';
+import DiscordClient from '../../client/client.js';
+import { weeklyUserExp as weekly } from '../schemas/WeeklyExpSchema.js';
+import { WeeklyUserXP } from '../../utils/GlobalTypes.js';
 
 export const setWeeklyExp = async (userId: string, xp: number) => {
   try {

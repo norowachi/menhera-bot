@@ -1,5 +1,5 @@
-import { warning } from '../schemas/WarningSchema';
-import { WarningData } from '../../utils/GlobalTypes';
+import { warning } from '../schemas/WarningSchema.js';
+import { WarningData } from '../../utils/GlobalTypes.js';
 import { Types } from 'mongoose';
 export const addWarning = async (WarningData: WarningData) => {
   const newWarning = new warning(WarningData);

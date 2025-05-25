@@ -1,5 +1,5 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -9,7 +9,7 @@ import {
   RoleSelectMenuBuilder,
   TextChannel,
 } from 'discord.js';
-import { initDoc } from '../../database/functions/rolesFunction';
+import { initDoc } from '../../database/functions/rolesFunction.js';
 
 export default class CreateReactRole extends BaseCommand {
   constructor() {

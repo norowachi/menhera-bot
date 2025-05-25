@@ -1,5 +1,5 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import { CommandInteraction, TextChannel } from 'discord.js';
 
 export default class PurgeCommand extends BaseCommand {

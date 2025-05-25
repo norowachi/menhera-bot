@@ -1,9 +1,9 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import { AttachmentBuilder, CommandInteraction, GuildMember } from 'discord.js';
-import { getAllUser } from '../../database/functions/userexpFunction';
-import { sortUserXP } from '../../utils/modules/expSystem';
-import { Rank } from '../../utils/modules/rankAttachment';
+import { getAllUser } from '../../database/functions/userexpFunction.js';
+import { sortUserXP } from '../../utils/modules/expSystem.js';
+import { Rank } from '../../utils/modules/rankAttachment.js';
 import { join } from 'path';
 
 export default class RankCommand extends BaseCommand {

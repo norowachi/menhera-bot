@@ -1,8 +1,8 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import { CommandInteraction, EmbedBuilder, Snowflake } from 'discord.js';
 import { Types } from 'mongoose';
-import { deleteWarning } from '../../database/functions/warningFunctions';
+import { deleteWarning } from '../../database/functions/warningFunctions.js';
 
 export default class DelWarnCommand extends BaseCommand {
   constructor() {

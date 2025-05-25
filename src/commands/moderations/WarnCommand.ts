@@ -1,7 +1,7 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import { CommandInteraction, GuildMember, EmbedBuilder } from 'discord.js';
-import { addWarning } from '../../database/functions/warningFunctions';
+import { addWarning } from '../../database/functions/warningFunctions.js';
 
 export default class WarnCommand extends BaseCommand {
   constructor() {

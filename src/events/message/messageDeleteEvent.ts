@@ -1,5 +1,5 @@
-import BaseEvent from '../../utils/structures/BaseEvent';
-import DiscordClient from '../../client/client';
+import BaseEvent from '../../utils/structures/BaseEvent.js';
+import DiscordClient from '../../client/client.js';
 import { Message, TextChannel } from 'discord.js';
 
 export default class messageDeleteEvent extends BaseEvent {

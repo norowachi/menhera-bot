@@ -1,4 +1,4 @@
-import DiscordClient from '../../client/client';
+import DiscordClient from '../../client/client.js';
 import {
   Guild,
   GuildMember,
@@ -10,13 +10,13 @@ import {
   setExp,
   getExp,
   initExp,
-} from '../../database/functions/userexpFunction';
+} from '../../database/functions/userexpFunction.js';
 import {
   setWeeklyExp,
   getWeeklyExp,
   initWeeklyExp,
-} from '../../database/functions/weeklyuserexpFunctions';
-import { getGuildSettings } from '../../database/functions/guildSettingsFunctions';
+} from '../../database/functions/weeklyuserexpFunctions.js';
+import { getGuildSettings } from '../../database/functions/guildSettingsFunctions.js';
 
 export const expSystem = async (client: DiscordClient, message: Message) => {
   if (!message.guild || !message.member) return;

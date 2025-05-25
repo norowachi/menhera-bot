@@ -1,6 +1,6 @@
-import { guildData } from '../../utils/GlobalTypes';
+import { guildData } from '../../utils/GlobalTypes.js';
 import { Document, Types } from 'mongoose';
-import { guilds } from '../schemas/guildSettings';
+import { guilds } from '../schemas/guildSettings.js';
 
 export const initGuildSettings = async (guildId: string): Promise<any> => {
   const id = new Types.ObjectId();

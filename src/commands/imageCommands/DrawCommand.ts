@@ -1,7 +1,7 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import { CommandInteraction } from 'discord.js';
-import CreateImage from '../../utils/modules/imgModule';
+import CreateImage from '../../utils/modules/imgModule.js';
 import path from 'path';
 
 export default class DrawCommand extends BaseCommand {

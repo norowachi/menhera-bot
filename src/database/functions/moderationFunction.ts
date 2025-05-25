@@ -1,6 +1,6 @@
-import { ModerationData } from '../../utils/GlobalTypes';
+import { ModerationData } from '../../utils/GlobalTypes.js';
 import { Types } from 'mongoose';
-import { moderation } from '../schemas/ModerationSchema';
+import { moderation } from '../schemas/ModerationSchema.js';
 
 export const addModeration = async (ModerationData: ModerationData) => {
   const id = new Types.ObjectId();

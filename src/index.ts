@@ -4,8 +4,8 @@ import {
   Partials,
   WebhookClient,
 } from 'discord.js';
-import DiscordClient from './client/client';
-import { registerCommands, registerEvents } from './utils/registry';
+import DiscordClient from './client/client.js';
+import { registerCommands, registerEvents } from './utils/registry.js';
 import { connect } from 'mongoose';
 import { config } from 'dotenv';
 

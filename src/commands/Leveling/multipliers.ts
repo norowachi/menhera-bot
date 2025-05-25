@@ -1,7 +1,7 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import { ChannelType, CommandInteraction } from 'discord.js';
-import { ModifyMulti } from '../../database/functions/guildSettingsFunctions';
+import { ModifyMulti } from '../../database/functions/guildSettingsFunctions.js';
 
 export default class MultipliersCommand extends BaseCommand {
   constructor() {

@@ -1,13 +1,13 @@
-import BaseCommand from '../../utils/structures/BaseCommand';
-import DiscordClient from '../../client/client';
+import BaseCommand from '../../utils/structures/BaseCommand.js';
+import DiscordClient from '../../client/client.js';
 import {
   CommandInteraction,
   Guild,
   GuildMember,
   EmbedBuilder,
 } from 'discord.js';
-import { setExp, getExp } from '../../database/functions/userexpFunction';
-import { levelUpMessage } from '../../utils/modules/expSystem';
+import { setExp, getExp } from '../../database/functions/userexpFunction.js';
+import { levelUpMessage } from '../../utils/modules/expSystem.js';
 
 export default class GiveLevelCommand extends BaseCommand {
   constructor() {

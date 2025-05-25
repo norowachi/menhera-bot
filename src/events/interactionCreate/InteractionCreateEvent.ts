@@ -1,12 +1,12 @@
-import BaseEvent from '../../utils/structures/BaseEvent';
-import DiscordClient from '../../client/client';
+import BaseEvent from '../../utils/structures/BaseEvent.js';
+import DiscordClient from '../../client/client.js';
 import {
   CommandInteraction,
   GuildMemberRoleManager,
   Interaction,
 } from 'discord.js';
-import { showRuleMenu } from '../../utils/modules/roleSystem';
-import { IsMenheraServer } from '../../utils/functions';
+import { showRuleMenu } from '../../utils/modules/roleSystem.js';
+import { IsMenheraServer } from '../../utils/functions.js';
 
 export default class InteractionCreateEvent extends BaseEvent {
   constructor() {

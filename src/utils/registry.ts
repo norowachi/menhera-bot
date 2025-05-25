@@ -14,7 +14,6 @@ export async function registerCommands(
     if (stat.isDirectory())
       await registerCommands(client, path.join(dir, file));
     if (file.endsWith('.js') || file.endsWith('.ts')) {
-      console.log(file);
       const { default: Command } = await import(
         path.join(import.meta.url, '..', dir, file)
       );

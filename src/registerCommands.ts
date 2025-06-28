@@ -172,6 +172,25 @@ const commands: ApplicationCommandData[] = [
     defaultMemberPermissions: ['ModerateMembers'],
   },
   {
+		name: "setlevel",
+		description: "Set a user's level",
+		options: [
+			{
+				type: ApplicationCommandOptionType.User,
+				name: "user",
+				description: "User to modify",
+				required: true,
+			},
+			{
+				type: ApplicationCommandOptionType.Number,
+				name: "level",
+				description: "Level to set",
+				required: true,
+			},
+		],
+	  defaultMemberPermissions: ["ModerateMembers"],
+	},
+  {
     name: 'purge',
     description: 'delete messages in bulk',
     options: [

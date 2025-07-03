@@ -10,7 +10,7 @@ export default class GuildMemberRemoveEvent extends BaseEvent {
   }
   async run(client: DiscordClient, member: GuildMember) {
     if (!IsMenheraServer(member.guild.id)) return;
-    LeaveMSGS(member);
+    //LeaveMSGS(member);
     // Delete member's exp data
     //DelUserExp(member.user.id);
     const joinLog = (await client.channels.fetch(

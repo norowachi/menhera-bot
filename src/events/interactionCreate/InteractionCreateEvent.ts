@@ -1,9 +1,14 @@
 import BaseEvent from '../../utils/structures/BaseEvent.js';
 import DiscordClient from '../../client/client.js';
 import {
+  ButtonStyle,
+  ChannelType,
   CommandInteraction,
+  ComponentType,
   GuildMemberRoleManager,
+  GuildTextBasedChannel,
   Interaction,
+  ThreadAutoArchiveDuration,
 } from 'discord.js';
 import { showRuleMenu } from '../../utils/modules/roleSystem.js';
 import { IsMenheraServer } from '../../utils/functions.js';
@@ -21,9 +26,10 @@ export default class InteractionCreateEvent extends BaseEvent {
       }
       // show-roles-{msg id}
       if (interaction.customId.includes('show-roles-')) {
-        interaction.message = await interaction.channel?.messages.fetch(
-          interaction.customId.split(/-/g)[2],
-        )!;
+        interaction.message =
+          (await interaction.channel?.messages.fetch(
+            interaction.customId.split(/-/g)[2],
+          )) ?? interaction.message;
         await showRuleMenu(interaction);
         return;
       }
@@ -68,6 +74,152 @@ export default class InteractionCreateEvent extends BaseEvent {
             ephemeral: true,
           })
           .catch();
+      }
+      // ticket system, technically could be used outside menhera servers
+      if (
+        interaction.customId === 'open-ticket' &&
+        interaction.channel?.type === ChannelType.GuildText
+      ) {
+        // check if user already has a ticket opened (we dont want dups, do we?)
+        const activeThreads = await interaction.channel.threads.fetchActive();
+        if (
+          activeThreads.threads.find(
+            (t) => t.name === `${interaction.user.username}-ticket`,
+          )
+        ) {
+          return await interaction
+            .reply({
+              content: 'You already have an open ticket!',
+              ephemeral: true,
+            })
+            .catch(() => {});
+        }
+        // create the thread
+        const thread = await interaction.channel.threads
+          .create({
+            name: `ticket-${interaction.user.username}`,
+            autoArchiveDuration: ThreadAutoArchiveDuration.ThreeDays,
+            reason: 'User opened a ticket',
+            type: ChannelType.PrivateThread,
+          })
+          .catch(console.error);
+        if (!thread)
+          return await interaction
+            .reply({
+              content:
+                'Failed to create a ticket, please contact staff about this error',
+              ephemeral: true,
+            })
+            .catch(() => {});
+        // ping user to add them to the thread
+        const firstMsg = await thread.send(`<@${interaction.user.id}>`);
+        // edit message to add mods to thread
+        await firstMsg
+          .edit({
+            // ping mode role
+            content: `<@&880737692864888843>`,
+          })
+          .then((m) => {
+            // then finally delete that message cuz, yk, aesthetics and stuff
+            m.delete().catch(() => {});
+            // make the thread uninvitable, in case the user is reporting
+            // someone and mentions them by mistake maybe?
+            thread.setInvitable(false).catch(() => {});
+          })
+          .catch(() => {});
+
+        // send the info embed
+        await thread
+          .send({
+            embeds: [
+              {
+                title: 'Ticket',
+                description: `Hello <@${interaction.user.id}>, a staff member will be with you shortly.\nTo close this ticket, press the "🔒 Close" button below.`,
+                color: 0xff66aa,
+                timestamp: new Date().toISOString(),
+              },
+            ],
+            components: [
+              {
+                type: ComponentType.ActionRow,
+                components: [
+                  {
+                    type: ComponentType.Button,
+                    style: ButtonStyle.Danger,
+                    label: 'Close',
+                    //? i dont think there's a need for perm checking since it'll  just get archieved
+                    //? (also anyone in the thread has perms to close it methinks)
+                    custom_id: `close-ticket`,
+                    emoji: { name: '🔒' },
+                  },
+                ],
+              },
+            ],
+          })
+          .catch(() => {});
+        // send log of ticket creation in reports channel
+        await (
+          interaction.guild?.channels.cache.get(
+            '1122654657915912307',
+          ) as GuildTextBasedChannel
+        ) // mod reports channel
+          ?.send({
+            embeds: [
+              {
+                title: 'Ticket opened',
+                description: `Ticket <#${thread.id}> opened by <@${interaction.user.id}>`,
+                color: 0xff66aa,
+                timestamp: new Date().toISOString(),
+              },
+            ],
+          })
+          .catch(() => {});
+        // ack the interaction
+        await interaction
+          .reply({
+            content: `Your ticket has been created: ${thread}`,
+            ephemeral: true,
+          })
+          .catch(() => {});
+        return;
+      }
+      // close ticket button
+      if (
+        interaction.customId === 'close-ticket' &&
+        interaction.channel?.type === ChannelType.PrivateThread
+      ) {
+        await interaction
+          .reply({
+            content: 'Closing ticket...',
+            ephemeral: true,
+          })
+          .catch(() => {});
+        interaction.channel
+          .setArchived(true, 'Ticket closed by @' + interaction.user.username)
+          .catch(() => {});
+
+        interaction.channel
+          .setLocked(true, 'Ticket closed by @' + interaction.user.username)
+          .catch(() => {});
+        // log the ticket closure
+        await (
+          interaction.guild?.channels.cache.get(
+            '1122654657915912307',
+          ) as GuildTextBasedChannel
+        ) // mod reports channel
+          ?.send({
+            embeds: [
+              {
+                title: 'Ticket closed',
+                description: `Ticket <#${interaction.channelId}> closed by <@${interaction.user.id}>`,
+                color: 0xff66aa,
+                timestamp: new Date().toISOString(),
+              },
+            ],
+          })
+          .catch(() => {});
+
+        return;
       }
       return;
     }

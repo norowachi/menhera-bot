@@ -101,6 +101,9 @@ export default class InteractionCreateEvent extends BaseEvent {
             autoArchiveDuration: ThreadAutoArchiveDuration.ThreeDays,
             reason: 'User opened a ticket',
             type: ChannelType.PrivateThread,
+            // make the thread uninvitable, in case the user is reporting
+            // someone and mentions them by mistake maybe?
+            invitable: false,
           })
           .catch(console.error);
         if (!thread)
@@ -116,15 +119,12 @@ export default class InteractionCreateEvent extends BaseEvent {
         // edit message to add mods to thread
         await firstMsg
           .edit({
-            // ping mode role
+            // ping mod role
             content: `<@&880737692864888843>`,
           })
           .then((m) => {
             // then finally delete that message cuz, yk, aesthetics and stuff
             m.delete().catch(() => {});
-            // make the thread uninvitable, in case the user is reporting
-            // someone and mentions them by mistake maybe?
-            thread.setInvitable(false).catch(() => {});
           })
           .catch(() => {});
 
@@ -134,7 +134,7 @@ export default class InteractionCreateEvent extends BaseEvent {
             embeds: [
               {
                 title: 'Ticket',
-                description: `Hello <@${interaction.user.id}>, a staff member will be with you shortly.\nTo close this ticket, press the "🔒 Close" button below.`,
+                description: `Hello <@${interaction.user.id}>, please state your issues or questions, a staff member will be with you shortly.\nTo close this ticket, press the "Close" button below.`,
                 color: 0xff66aa,
                 timestamp: new Date().toISOString(),
               },
@@ -147,7 +147,7 @@ export default class InteractionCreateEvent extends BaseEvent {
                     type: ComponentType.Button,
                     style: ButtonStyle.Danger,
                     label: 'Close',
-                    //? i dont think there's a need for perm checking since it'll  just get archieved
+                    //? i dont think there's a need for perm checking since it'll  just get archived
                     //? (also anyone in the thread has perms to close it methinks)
                     custom_id: `close-ticket`,
                     emoji: { name: '🔒' },

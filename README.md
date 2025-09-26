@@ -35,7 +35,7 @@
 
 ## About The Project
 
-Menhera Bot is a private [Discord](https://discord.com) bot built for the Menherachan Hub & Minihub
+Menhera Bot is a private [Discord](https://discord.com) bot built for personal use
 
 ### Built With
 
@@ -103,10 +103,6 @@ Contributions are greatly appreciated.
 
 Important!
 by downloading the following program you agree to the following LICENSE in the LICENSE file.
-
-<br><br>
-[Menherachan Hub](https://discord.gg/menhera)
-[Menherachan Minihub](https://discord.gg/menherachan)
 
 ## Notes & things To Remember
 

@@ -196,14 +196,10 @@ export default class InteractionCreateEvent extends BaseEvent {
           .catch(() => {});
         interaction.channel
           .setLocked(true, 'Ticket closed by @' + interaction.user.username)
-          .catch(() => {
-            console.log('failed to lock thread');
-          });
+          .catch(() => {});
         interaction.channel
           .setArchived(true, 'Ticket closed by @' + interaction.user.username)
-          .catch(() => {
-            console.log('failed to archive thread');
-          });
+          .catch(() => {});
         // log the ticket closure
         await (
           interaction.guild?.channels.cache.get(

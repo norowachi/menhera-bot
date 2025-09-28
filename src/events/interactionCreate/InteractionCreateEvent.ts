@@ -84,7 +84,7 @@ export default class InteractionCreateEvent extends BaseEvent {
         const activeThreads = await interaction.channel.threads.fetchActive();
         if (
           activeThreads.threads.find(
-            (t) => t.name === `${interaction.user.username}-ticket`,
+            (t) => t.name === `ticket-${interaction.user.username}`,
           )
         ) {
           return await interaction

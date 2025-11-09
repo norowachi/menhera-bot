@@ -14,6 +14,6 @@ export default class PurgeCommand extends BaseCommand {
     });
     const amount = interaction.options.data[0].value as number;
     const channel = interaction.channel as TextChannel;
-    await channel.bulkDelete(amount + 1, true);
+    await channel.bulkDelete(amount, true);
   }
 }

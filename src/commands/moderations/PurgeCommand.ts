@@ -4,7 +4,7 @@ import { CommandInteraction, TextChannel } from 'discord.js';
 
 export default class PurgeCommand extends BaseCommand {
   constructor() {
-    super('purge', 'moderation');
+    super('purge', 'moderation', true);
   }
 
   async run(_client: DiscordClient, interaction: CommandInteraction) {

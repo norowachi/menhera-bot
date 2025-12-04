@@ -5,6 +5,7 @@ export default abstract class BaseCommand {
   constructor(
     private name: string,
     private category: string,
+    private global: boolean = false,
   ) {}
 
   getName(): string {
@@ -12,6 +13,9 @@ export default abstract class BaseCommand {
   }
   getCategory(): string {
     return this.category;
+  }
+  isGlobal(): boolean {
+    return this.global;
   }
 
   abstract run(client: DiscordClient, data: CommandInteraction): Promise<void>;

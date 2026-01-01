@@ -9,17 +9,17 @@ export async function antiInvite(client: DiscordClient, message: Message) {
   );
   if (isMod) return;
 
-  // 5 groups, 5th one is the code
+  // 6 groups, last one is the code
   const invite =
-    /(https?:\/\/)?(www\.)?(discord\.gg|discordapp\.com\/invite|discord\.com\/invite|\s\.gg)\/([a-zA-Z0-9]+)/gi.exec(
+    /(https?:\/\/)?(www\.)?(discord\.gg|discordapp\.com\/invite|discord\.com\/invite|(^|\s)\.gg)\/([a-zA-Z0-9]+)/gi.exec(
       message.content,
-    )?.[4];
+    )?.[5];
 
   if (!invite) return;
   const inviteInfo = await client.fetchInvite(invite);
   const id = inviteInfo?.guild?.id;
   const automodChannel = client.channels.cache.get(
-    '880737693263812126',
+    '1079853758219042980',
   ) as TextChannel;
 
   // if invite guild id is found and it's not menhera server

@@ -14,17 +14,18 @@ export async function antiInvite(client: DiscordClient, message: Message) {
     /(https?:\/\/)?(www\.)?(discord\.gg|discordapp\.com\/invite|discord\.com\/invite|(^|\s)\.gg)\/([a-zA-Z0-9]+)/gi.exec(
       message.content,
     )?.[5];
-
   if (!invite) return;
+
   const inviteInfo = await client.fetchInvite(invite);
   const id = inviteInfo?.guild?.id;
+
   const automodChannel = client.channels.cache.get(
     '1079853758219042980',
   ) as TextChannel;
 
   // if invite guild id is found and it's not menhera server
   if (id && !IsMenheraServer(id)) {
-    await message.delete();
+    message.delete();
     // notify user about rules
     (message.channel as TextChannel)
       .send(
@@ -34,7 +35,7 @@ export async function antiInvite(client: DiscordClient, message: Message) {
         setTimeout(() => msg.delete(), 10 * 1000);
       });
     // send log
-    await automodChannel.send({
+    automodChannel.send({
       embeds: [
         {
           color: 0xff0000,

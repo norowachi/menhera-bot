@@ -34,6 +34,8 @@ export async function antiInvite(client: DiscordClient, message: Message) {
       .then((msg) => {
         setTimeout(() => msg.delete(), 10 * 1000);
       });
+    // timeout user for 10mins
+    message.member?.timeout(10 * 60 * 1000, 'Sharing discord invites');
     // send log
     automodChannel.send({
       embeds: [

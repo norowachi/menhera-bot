@@ -62,7 +62,7 @@ export async function antiInvite(client: DiscordClient, message: Message) {
               name: 'Invited Server',
               value: `**${
                 inviteInfo?.guild?.name || 'Unknown Server'
-              }** (${id || 'No Guild ID'}) | `,
+              }** (${id || 'No Guild ID'})`,
               inline: true,
             },
           ],

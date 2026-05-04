@@ -85,26 +85,28 @@ async function Brithdays(client: DiscordClient) {
       const member = await client.guilds.cache
         .get('551888982905192459')
         ?.members.fetch(d.userId!);
-      // if member not found, skip
-      if (!member) return await d.deleteOne();
-      // add cake role
-      member?.roles.add('1212489708446416936');
-      setTimeout(
-        () => member?.roles.remove('1212489708446416936'),
-        24 * 60 * 60 * 1000,
-      ); // 24 hours
+      // if member not found, skip & delete
+      if (!member) await d.deleteOne()
+      else {
+        // add cake role
+        member?.roles.add('1212489708446416936');
+        setTimeout(
+          () => member?.roles.remove('1212489708446416936'),
+          24 * 60 * 60 * 1000,
+        ); // 24 hours
 
-      const [month, day] = d.birthday!.split('-');
-      const BDayDate = new Date(
-        `${month}-${day}-${new Date().getFullYear() + 1}`,
-      );
-      d.in = BDayDate.getTime();
+        const [month, day] = d.birthday!.split('-');
+        const BDayDate = new Date(
+          `${month}-${day}-${new Date().getFullYear() + 1}`,
+        );
+        d.in = BDayDate.getTime();
 
-      await d.save();
+        await d.save();
+      }
     } catch (e) {
       console.log(e);
       return;
     }
-  });
+  };
   return;
 }

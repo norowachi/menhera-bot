@@ -79,14 +79,14 @@ async function Brithdays(client: DiscordClient) {
     })
     .catch((err) => console.error(err));
 
-  bdays.forEach(async (d) => {
+  for (const d in bdays) {
     try {
       // get member in menhera hub
       const member = await client.guilds.cache
         .get('551888982905192459')
         ?.members.fetch(d.userId!);
       // if member not found, skip
-      if (!member) return;
+      if (!member) return await d.deleteOne();
       // add cake role
       member?.roles.add('1212489708446416936');
       setTimeout(

@@ -79,7 +79,7 @@ async function Brithdays(client: DiscordClient) {
     })
     .catch((err) => console.error(err));
 
-  for (const d in bdays) {
+  for (const d of bdays) {
     try {
       // get member in menhera hub
       const member = await client.guilds.cache

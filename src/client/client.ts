@@ -9,6 +9,7 @@ import {
 import BaseEvent from '../utils/structures/BaseEvent.js';
 import BaseCommand from '../utils/structures/BaseCommand.js';
 import { expData, moderationMap, userXP } from '../utils/GlobalTypes.js';
+import { type Worker } from 'tesseract.js';
 
 export default class DiscordClient extends Client {
   private _commands = new Collection<string, BaseCommand>();
@@ -25,9 +26,11 @@ export default class DiscordClient extends Client {
     userXP: new Map<string, userXP>(),
     weeklyUserExp: new Map<string, userXP>(),
   };
+  public OCRWorker: Worker;
 
-  constructor(options: ClientOptions) {
+  constructor(options: ClientOptions, Worker: Worker) {
     super(options);
+    this.OCRWorker = Worker;
   }
 
   get commands(): Collection<string, BaseCommand> {

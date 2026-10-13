@@ -11,8 +11,7 @@ export default class UnbanCommand extends BaseCommand {
     const reason =
       (interaction.options.get('reason', false)?.value as string) ||
       'No Reason Provided';
-    const banList = await interaction.guild!.bans.fetch();
-    const bannedUser = banList.get(bannedId);
+    const bannedUser = await interaction.guild!.bans.fetch(bannedId);
     if (!bannedUser) {
       const embed = new EmbedBuilder()
         .setColor('Red')

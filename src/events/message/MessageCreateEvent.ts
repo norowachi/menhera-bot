@@ -52,8 +52,8 @@ async function imgScan(client: DiscordClient, message: Message) {
     await client.logChannel.send({ embeds: [logEmbed] });
 
     // timeout the member and delete message
-    message.delete();
-    message.member?.timeout(24 * 60 * 60 * 1000, reason);
+    await message.delete();
+    await message.member?.timeout(24 * 60 * 60 * 1000, reason);
   }
   return;
 }
